@@ -16,4 +16,13 @@
         <item name="android:textStyle">bold|italic</item>
     </style>
 
+    <style name="TimepickerStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="title">false</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name= "android:textColorSecondary">@color/black</item>
+        <item name = "background">@drawable/date_background</item>
+        <item name = "android:textStyle">bold</item>
+
+    </style>
+
 </resources>

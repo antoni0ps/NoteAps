@@ -109,37 +109,84 @@
                 app:icon="@drawable/ic_calendar"
                 android:visibility="gone"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Fecha Elegida:"
-                android:layout_marginTop="8dp"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:layout_weight="1"/>
+
 
             <!--VISUALIZAR FECHA ELEGIDA-->
-            <TextView
-                android:id="@+id/tvCalendarDate"
-                android:layout_width="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_height="wrap_content"
-                android:hint="00/00/0000"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:layout_weight="1"/>
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!--ESTADO DE LA NOTA-->
         <TextView
             android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:text="No finalizada"
             android:textSize="20sp"
             android:visibility="gone"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TimePicker
+                android:layout_margin="5dp"
+                android:id="@+id/customTimePicker"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:theme="@style/TimepickerStyle"
+                android:timePickerMode="spinner"
+                android:layout_gravity="center"
+                android:background="@drawable/custom_timepicker"
+                android:layout_weight="1"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_timepicker"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha y hora"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="8dp"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tvCalendarDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="00/00/0000"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="00:00 "
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:layout_weight="1"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

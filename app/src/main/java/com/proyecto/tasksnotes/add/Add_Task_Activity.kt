@@ -8,6 +8,7 @@ import android.provider.CalendarContract
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.TimePicker.OnTimeChangedListener
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,6 @@ import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.databinding.ActivityAddTaskBinding
 import com.proyecto.tasksnotes.model.Task
 import com.vivekkaushik.datepicker.OnDateSelectedListener
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,62 +52,77 @@ class Add_Task_Activity : AppCompatActivity() {
         getAndSetData()
         getDateAndTime()
         createDatePickerTimeLine()
+        createCustomTimePicker()
 
 
         //Creamos un datepickerdialog al pulsar el botón calendario y establecemos la fecha en el textview correspondiente
         binding.calendarButton.setOnClickListener {
 
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay ->
-
-
-                newYear = mYear
-                newMonth = month
-                newDay = mDay
-
-                val formatedDay: String
-                val formatedMonth: String
-                val month = mMonth + 1
-
-                formatedDay = if (mDay < 10) {
-                    "0$mDay"
-                } else {
-                    mDay.toString()
-                }
-                formatedMonth = if (month < 10) {
-                    "0$month"
-                } else {
-                    month.toString()
-                }
-
-                binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$mYear"
-
-
-            }, year, month, day)
-
-            datePickerDialog.show()
-
-
-
-            val newCalendar = Calendar.getInstance()
-            newCalendar.set(Calendar.YEAR, newYear)
-            newCalendar.set(Calendar.MONTH, newMonth)
-            newCalendar.set(Calendar.DAY_OF_MONTH, newDay)
-
-            val intent = Intent()
-            intent.action = Intent.ACTION_EDIT
-            intent.type = "vnd.android.cursor.item/event"
-
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_ID,binding.etTitle.text.toString())
-            startActivity(intent)
         }
 
 
+    }
+
+    private fun ANTIGUODATEPICKERBORRAR(){
+
+        /*val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay ->
+
+            newYear = mYear
+            newMonth = month
+            newDay = mDay
+
+            val formatedDay: String
+            val formatedMonth: String
+            val month = mMonth + 1
+
+            formatedDay = if (mDay < 10) {
+                "0$mDay"
+            } else {
+                mDay.toString()
+            }
+            formatedMonth = if (month < 10) {
+                "0$month"
+            } else {
+                month.toString()
+            }
+
+            binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$mYear"
+
+        }, year, month, day)
+
+        datePickerDialog.show()*/
+
+
+
+        val newCalendar = Calendar.getInstance()
+        newCalendar.set(Calendar.YEAR, newYear)
+        newCalendar.set(Calendar.MONTH, newMonth)
+        newCalendar.set(Calendar.DAY_OF_MONTH, newDay)
+
+        val intent = Intent()
+        intent.action = Intent.ACTION_EDIT
+        intent.type = "vnd.android.cursor.item/event"
+
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
+        intent.putExtra(CalendarContract.EXTRA_EVENT_ID,binding.etTitle.text.toString())
+        startActivity(intent)
+    }
+
+    private fun createCustomTimePicker(){
+
+        val timePicker = binding.customTimePicker
+        timePicker.setIs24HourView(true)
+
+        timePicker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hourOfDay, minute ->
+
+            binding.tvTime.setText("$hourOfDay : $minute")
+        })
     }
 
     private fun createDatePickerTimeLine(){
@@ -118,10 +133,6 @@ class Add_Task_Activity : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerTimeline = binding.datePickerTimeline
-
-        datePickerTimeline.setDateTextColor(R.color.dark_grey);
-        datePickerTimeline.setDayTextColor(R.color.dark_grey);
-        datePickerTimeline.setMonthTextColor(R.color.dark_grey);
 
         //Establecemos la fecha de inicio del calendario
         datePickerTimeline.setInitialDate(year, month, day)
