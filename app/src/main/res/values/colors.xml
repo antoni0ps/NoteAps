@@ -15,13 +15,13 @@
 
 
     <color name="yellow">#FFE082</color>
-    <color name="lightGreen">#A5D6A7</color>
+    <color name="lightGreen">#C5E1A5</color>
     <color name="pink">#CE93D8</color>
     <color name="lightOrange">#EF9A9A</color>
     <color name="lightBlue">#90CAF9</color>
     <color name="gray">#e0e0e0</color>
-    <color name="red">#DB4848</color>
-    <color name="blue">#80DEEA</color>
+    <color name="red">#F48FB1</color>
+    <color name="blue">#80CBC4</color>
     <color name="lightPurple">#9FA8DA</color>
 
 </resources>

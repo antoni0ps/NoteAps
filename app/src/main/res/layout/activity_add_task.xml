@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,108 +15,131 @@
         <!--UID DEL USUARIO-->
         <TextView
             android:id="@+id/tvUserName"
-            android:hint="Usuario"
-            android:visibility="gone"
-            android:textSize="18sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:hint="Usuario"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <!--CORREO DEL USUARIO-->
         <TextView
             android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:hint="Correo electrónico"
             android:textSize="18sp"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:visibility="gone" />
 
         <!--ICONO - TEXTVIEW-->
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
             <!--Icono-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_time"/>
+                android:src="@drawable/ic_time" />
 
             <TextView
-                android:text="Fecha de registro: "
-                android:textSize="18sp"
-                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Fecha de registro: "
+                android:textSize="18sp" />
 
             <!--FECHA Y HORA ACTUAL DEL DISPOSITIVO-->
             <TextView
                 android:id="@+id/tvActualDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:hint="Fecha y hora actual"
                 android:textSize="16sp"
-                android:layout_marginStart="8dp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
         <!--TITULO-->
         <EditText
             android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Título"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
 
         <!--DESCRIPCION-->
         <EditText
             android:id="@+id/etDescription"
-            android:hint="Descripción"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:minHeight="150dp"
-            android:gravity="start"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:hint="Descripción"
+            android:minHeight="150dp"
+            android:textSize="20sp" />
+
+
+        <com.vivekkaushik.datepicker.DatePickerTimeline
+            android:id="@+id/datePickerTimeline"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/date_background" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:weightSum="2"
             android:orientation="horizontal">
 
             <!--BOTÓN PARA ABRIR CALENDARIO-->
             <Button
                 android:id="@+id/calendarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Calendario"
                 app:icon="@drawable/ic_calendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha Elegida:"
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:layout_weight="1"/>
 
             <!--VISUALIZAR FECHA ELEGIDA-->
             <TextView
                 android:id="@+id/tvCalendarDate"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
                 android:hint="00/00/0000"
+                android:textAlignment="center"
                 android:textSize="20sp"
-                android:layout_marginStart="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_weight="1"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!--ESTADO DE LA NOTA-->
         <TextView
             android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:text="No finalizada"
             android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:visibility="gone"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

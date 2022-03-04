@@ -1,21 +1,24 @@
 package com.proyecto.tasksnotes.add
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.proyecto.tasksnotes.model.Task
 import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.databinding.ActivityAddTaskBinding
+import com.proyecto.tasksnotes.model.Task
+import com.vivekkaushik.datepicker.OnDateSelectedListener
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,9 +41,17 @@ class Add_Task_Activity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
+        var newDay: Int = 0
+        var newMonth: Int = 0
+        var newYear: Int = 0
+
+
+
+
         createActionBar()
         getAndSetData()
         getDateAndTime()
+        createDatePickerTimeLine()
 
 
         //Creamos un datepickerdialog al pulsar el botón calendario y establecemos la fecha en el textview correspondiente
@@ -51,7 +62,12 @@ class Add_Task_Activity : AppCompatActivity() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(this, { view, mYear, mMonth, mDay ->
+            val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay ->
+
+
+                newYear = mYear
+                newMonth = month
+                newDay = mDay
 
                 val formatedDay: String
                 val formatedMonth: String
@@ -69,12 +85,74 @@ class Add_Task_Activity : AppCompatActivity() {
                 }
 
                 binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$mYear"
+
+
             }, year, month, day)
 
             datePickerDialog.show()
+
+
+
+            val newCalendar = Calendar.getInstance()
+            newCalendar.set(Calendar.YEAR, newYear)
+            newCalendar.set(Calendar.MONTH, newMonth)
+            newCalendar.set(Calendar.DAY_OF_MONTH, newDay)
+
+            val intent = Intent()
+            intent.action = Intent.ACTION_EDIT
+            intent.type = "vnd.android.cursor.item/event"
+
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_ID,binding.etTitle.text.toString())
+            startActivity(intent)
         }
 
 
+    }
+
+    private fun createDatePickerTimeLine(){
+
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerTimeline = binding.datePickerTimeline
+
+        datePickerTimeline.setDateTextColor(R.color.dark_grey);
+        datePickerTimeline.setDayTextColor(R.color.dark_grey);
+        datePickerTimeline.setMonthTextColor(R.color.dark_grey);
+
+        //Establecemos la fecha de inicio del calendario
+        datePickerTimeline.setInitialDate(year, month, day)
+
+
+        datePickerTimeline.setOnDateSelectedListener(object : OnDateSelectedListener {
+            override fun onDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int) {
+
+                val formatedDay: String
+                val formatedMonth: String
+                val mMonth = month + 1
+
+                formatedDay = if (day < 10) {
+                    "0$day"
+                } else {
+                    day.toString()
+                }
+                formatedMonth = if (month < 10) {
+                    "0$mMonth"
+                } else {
+                    month.toString()
+                }
+
+
+                binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
+            }
+
+            override fun onDisabledDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int, isDisabled: Boolean) {
+                // Do Something
+            }
+        })
     }
 
     private fun getTaskData() {
