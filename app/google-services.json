@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "171087919905",
+    "project_id": "tareas-y-notas",
+    "storage_bucket": "tareas-y-notas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171087919905:android:c88b656470b06d2274dc60",
+        "android_client_info": {
+          "package_name": "com.proyecto.tasksnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171087919905-275sm9hcesoorama0u480g7rpi0icvsg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyecto.tasksnotes",
+            "certificate_hash": "9a97d81f772391e7c35a737ba913d74995d604ea"
+          }
+        },
+        {
+          "client_id": "171087919905-6f4on464bjcnvlpkh2n7hbk0vdcev8fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnak_klzTUxY-3iDl8YPMfaha1MATt0VQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171087919905-6f4on464bjcnvlpkh2n7hbk0vdcev8fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
