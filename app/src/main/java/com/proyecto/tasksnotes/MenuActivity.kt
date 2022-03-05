@@ -55,7 +55,7 @@ class MenuActivity : AppCompatActivity() {
         binding.myTasksButton.setOnClickListener {
             startActivity(Intent(this, List_Tasks::class.java))
         }
-        binding.addNoteButton.setOnClickListener {
+        binding.addNote.setOnClickListener {
             startActivity(Intent(this, Add_Note_Activity::class.java))
         }
         binding.myNotesButton.setOnClickListener {
@@ -94,7 +94,7 @@ class MenuActivity : AppCompatActivity() {
                     binding.addTaskButton.isEnabled = true
                     binding.myNotesButton.isEnabled = true
                     binding.myTasksButton.isEnabled = true
-                    binding.addNoteButton.isEnabled = true
+                    binding.addNote.isEnabled = true
                     binding.aboutButton.isEnabled = true
                     binding.logoutButton.isEnabled = true
                 }

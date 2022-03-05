@@ -53,7 +53,7 @@ class List_Notes : AppCompatActivity() {
         db = FirebaseDatabase.getInstance()
         databaseReference = db.getReference("notes")
 
-        binding.addButton.setOnClickListener {
+        binding.addNoteButton.setOnClickListener {
 
             val intent = Intent(this,Add_Note_Activity::class.java)
             startActivity(intent)

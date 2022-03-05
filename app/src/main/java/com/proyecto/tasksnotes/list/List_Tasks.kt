@@ -21,6 +21,7 @@ import com.google.firebase.database.*
 import com.proyecto.tasksnotes.detail.Detail_Task_Activity
 import com.proyecto.tasksnotes.model.Task
 import com.proyecto.tasksnotes.R
+import com.proyecto.tasksnotes.add.Add_Task_Activity
 import com.proyecto.tasksnotes.viewholder.ViewHolder_Task
 import com.proyecto.tasksnotes.databinding.ActivityListTasksBinding
 import com.proyecto.tasksnotes.databinding.OptionsDialogBinding
@@ -57,6 +58,9 @@ class List_Tasks : AppCompatActivity() {
         createActionBar()
         listTasks()
         dialog = Dialog(this)
+        binding.addTaskButton.setOnClickListener {
+            startActivity(Intent(this,Add_Task_Activity::class.java))
+        }
 
 
     }

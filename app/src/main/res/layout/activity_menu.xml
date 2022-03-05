@@ -164,7 +164,7 @@
                         android:src="@drawable/addnote" />
 
                     <Button
-                        android:id="@+id/addNoteButton"
+                        android:id="@+id/addNote"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
