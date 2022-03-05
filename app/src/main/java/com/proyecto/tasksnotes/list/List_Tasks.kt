@@ -208,7 +208,6 @@ class List_Tasks : AppCompatActivity() {
             val query = dataBaseReference.child(firebaseUser.uid).child("tasks").orderByChild("taskId").equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
-
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     for (ds in snapshot.children) {
@@ -223,7 +222,6 @@ class List_Tasks : AppCompatActivity() {
                             Toast.makeText(applicationContext, "Tarea no finalizada", Toast.LENGTH_SHORT).show()
                         }
                     }
-
                 }
 
                 override fun onCancelled(error: DatabaseError) {

@@ -21,6 +21,8 @@ import com.google.firebase.database.*
 import com.proyecto.tasksnotes.detail.Detail_Note_Activity
 import com.proyecto.tasksnotes.model.Note
 import com.proyecto.tasksnotes.R
+import com.proyecto.tasksnotes.add.Add_Note_Activity
+import com.proyecto.tasksnotes.databinding.ActivityAddNoteBinding
 import com.proyecto.tasksnotes.viewholder.ViewHolder_Note
 import com.proyecto.tasksnotes.databinding.ActivityListNotesBinding
 import java.util.*
@@ -51,6 +53,11 @@ class List_Notes : AppCompatActivity() {
         db = FirebaseDatabase.getInstance()
         databaseReference = db.getReference("notes")
 
+        binding.addButton.setOnClickListener {
+
+            val intent = Intent(this,Add_Note_Activity::class.java)
+            startActivity(intent)
+        }
 
         createActionBar()
         listNotes()

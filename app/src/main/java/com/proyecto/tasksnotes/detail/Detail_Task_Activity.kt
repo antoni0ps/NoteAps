@@ -40,7 +40,7 @@ class Detail_Task_Activity : AppCompatActivity() {
     private fun createActionBar() {
         val actionBar = supportActionBar
         with(actionBar) {
-            this!!.title = "Detalles de la nota"
+            this!!.title = "Detalles de la tarea"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }
