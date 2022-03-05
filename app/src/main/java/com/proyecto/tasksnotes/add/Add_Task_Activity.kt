@@ -1,6 +1,6 @@
 package com.proyecto.tasksnotes.add
 
-import android.app.DatePickerDialog
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -51,16 +51,8 @@ class Add_Task_Activity : AppCompatActivity() {
         createActionBar()
         getAndSetData()
         getDateAndTime()
-        createDatePickerTimeLine()
+        createDatePickerAndTimePicker()
         createCustomTimePicker()
-
-
-        //Creamos un datepickerdialog al pulsar el botón calendario y establecemos la fecha en el textview correspondiente
-        binding.calendarButton.setOnClickListener {
-
-
-        }
-
 
     }
 
@@ -97,21 +89,6 @@ class Add_Task_Activity : AppCompatActivity() {
         }, year, month, day)
 
         datePickerDialog.show()*/
-
-
-
-        val newCalendar = Calendar.getInstance()
-        newCalendar.set(Calendar.YEAR, newYear)
-        newCalendar.set(Calendar.MONTH, newMonth)
-        newCalendar.set(Calendar.DAY_OF_MONTH, newDay)
-
-        val intent = Intent()
-        intent.action = Intent.ACTION_EDIT
-        intent.type = "vnd.android.cursor.item/event"
-
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
-        intent.putExtra(CalendarContract.EXTRA_EVENT_ID,binding.etTitle.text.toString())
-        startActivity(intent)
     }
 
     private fun createCustomTimePicker(){
@@ -125,7 +102,7 @@ class Add_Task_Activity : AppCompatActivity() {
         })
     }
 
-    private fun createDatePickerTimeLine(){
+    private fun createDatePickerAndTimePicker(){
 
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -139,7 +116,10 @@ class Add_Task_Activity : AppCompatActivity() {
 
 
         datePickerTimeline.setOnDateSelectedListener(object : OnDateSelectedListener {
+            @SuppressLint("SetTextI18n")
             override fun onDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int) {
+
+
 
                 val formatedDay: String
                 val formatedMonth: String
@@ -157,11 +137,46 @@ class Add_Task_Activity : AppCompatActivity() {
                 }
 
 
-                binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
+                //Creamos el DatePicker
+                val timePicker = binding.customTimePicker
+                timePicker.setIs24HourView(true)
+                timePicker.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute ->
+
+
+                    val hour = hourOfDay
+                    val min = minute
+                    binding.tvTime.text = "$hourOfDay : $minute"
+
+                    //Creamos nueva instancia de calendario con los valores elegidos
+                    val newCalendar = Calendar.getInstance()
+                    newCalendar.set(Calendar.YEAR,year)
+                    newCalendar.set(Calendar.MONTH, month)
+                    newCalendar.set(Calendar.DAY_OF_MONTH,day)
+                    newCalendar.set(Calendar.HOUR_OF_DAY,hour)
+                    newCalendar.set(Calendar.MINUTE,min)
+
+                    binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
+
+                    binding.calendarButton.setOnClickListener {
+
+                        val intent = Intent()
+                        intent.action = Intent.ACTION_EDIT
+                        intent.type = "vnd.android.cursor.item/event"
+
+                        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
+                        intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
+                        intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
+                        startActivity(intent)
+
+                    }
+
+                })
+
+
             }
 
             override fun onDisabledDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int, isDisabled: Boolean) {
-                // Do Something
+
             }
         })
     }
@@ -192,10 +207,8 @@ class Add_Task_Activity : AppCompatActivity() {
 
     }
 
-    private fun addTaskToDatabase(
-        userUid: String, taskId: String, userName: String, email: String, actualDate: String,
-        title: String, description: String, taskDate: String, status: String
-    ) {
+    private fun addTaskToDatabase(userUid: String, taskId: String, userName: String, email: String, actualDate: String,
+        title: String, description: String, taskDate: String, status: String) {
 
 
         val task = Task(userUid, taskId, userName, email, actualDate, title, description, taskDate, status)

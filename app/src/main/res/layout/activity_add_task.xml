@@ -100,14 +100,7 @@
             android:weightSum="2"
             android:orientation="horizontal">
 
-            <!--BOTÓN PARA ABRIR CALENDARIO-->
-            <Button
-                android:id="@+id/calendarButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calendario"
-                app:icon="@drawable/ic_calendar"
-                android:visibility="gone"/>
+
 
 
 
@@ -185,7 +178,21 @@
 
 
 
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!--BOTÓN PARA ABRIR CALENDARIO-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/calendarButton"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:translationZ="5dp"
+            android:text="Añadir evento al calendario"
+            app:icon="@drawable/ic_calendar"
+            android:layout_gravity="center"/>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
