@@ -43,21 +43,18 @@ class MenuActivity : AppCompatActivity() {
 
         loadData()
 
-        binding.addTaskButton.setOnClickListener {
-
-            val intent = Intent(this, Add_Task_Activity::class.java)
+        //Datos enviados por el botón añadir tarea
+            /*val intent = Intent(this, Add_Task_Activity::class.java)
             name = binding.tvName.text.toString()
             email = binding.tvEmail.text.toString()
             intent.putExtra("name", name)
             intent.putExtra("email", email)
-            startActivity(intent)
-        }
+            startActivity(intent)*/
+
         binding.myTasksButton.setOnClickListener {
             startActivity(Intent(this, List_Tasks::class.java))
         }
-        binding.addNote.setOnClickListener {
-            startActivity(Intent(this, Add_Note_Activity::class.java))
-        }
+
         binding.myNotesButton.setOnClickListener {
             startActivity(Intent(this, List_Notes::class.java))
         }
@@ -91,10 +88,9 @@ class MenuActivity : AppCompatActivity() {
                     binding.tvEmail.setText(email)
 
                     //Si existe usuario logueado habilitamos los botones del menu
-                    binding.addTaskButton.isEnabled = true
+                    binding.myEventsButton.isEnabled = true
                     binding.myNotesButton.isEnabled = true
                     binding.myTasksButton.isEnabled = true
-                    binding.addNote.isEnabled = true
                     binding.aboutButton.isEnabled = true
                     binding.logoutButton.isEnabled = true
                 }

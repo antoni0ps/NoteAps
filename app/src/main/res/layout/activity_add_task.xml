@@ -91,7 +91,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/date_background" />
+            android:background="@drawable/gradient_background_border" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
