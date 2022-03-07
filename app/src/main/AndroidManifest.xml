@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.proyecto.tasksnotes">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,12 @@
         android:roundIcon="@mipmap/ic_notes_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TasksNotes">
+        <activity
+            android:name=".add.Add_Event_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".detail.Detail_Event_Activity"
+            android:exported="false" />
         <activity
             android:name=".detail.Detail_Note_Activity"
             android:exported="false" />
@@ -28,7 +34,8 @@
             android:exported="false" />
         <activity
             android:name=".add.Add_Task_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".MenuActivity"
             android:exported="false" />

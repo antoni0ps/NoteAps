@@ -12,14 +12,14 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <!--UID DEL USUARIO-->
+        <!--NOMBRE DEL USUARIO-->
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Usuario"
+            android:hint="Nombre usuario"
             android:textSize="18sp"
-            android:visibility="gone" />
+             />
 
         <!--CORREO DEL USUARIO-->
         <TextView
@@ -27,8 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"
-            android:textSize="18sp"
-            android:visibility="gone" />
+            android:textSize="18sp" />
 
         <!--ICONO - TEXTVIEW-->
         <androidx.appcompat.widget.LinearLayoutCompat

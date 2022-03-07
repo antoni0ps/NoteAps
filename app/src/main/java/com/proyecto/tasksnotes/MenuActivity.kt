@@ -43,13 +43,9 @@ class MenuActivity : AppCompatActivity() {
 
         loadData()
 
-        //Datos enviados por el botón añadir tarea
-            /*val intent = Intent(this, Add_Task_Activity::class.java)
-            name = binding.tvName.text.toString()
-            email = binding.tvEmail.text.toString()
-            intent.putExtra("name", name)
-            intent.putExtra("email", email)
-            startActivity(intent)*/
+
+
+
 
         binding.myTasksButton.setOnClickListener {
             startActivity(Intent(this, List_Tasks::class.java))
@@ -84,8 +80,8 @@ class MenuActivity : AppCompatActivity() {
                     val email = "" + snapshot.child("email").value
 
                     // En caso de que exista un usuario logueado seteamos el texto con su nombre y su email
-                    binding.tvName.setText("$name $surname")
-                    binding.tvEmail.setText(email)
+                    binding.tvName.text = "$name $surname"
+                    binding.tvEmail.text = email
 
                     //Si existe usuario logueado habilitamos los botones del menu
                     binding.myEventsButton.isEnabled = true
@@ -106,4 +102,5 @@ class MenuActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show()
     }
+
 }

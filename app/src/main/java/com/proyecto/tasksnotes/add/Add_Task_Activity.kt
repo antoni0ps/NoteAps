@@ -41,9 +41,7 @@ class Add_Task_Activity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        var newDay: Int = 0
-        var newMonth: Int = 0
-        var newYear: Int = 0
+
 
 
 
@@ -56,7 +54,7 @@ class Add_Task_Activity : AppCompatActivity() {
 
     }
 
-    private fun ANTIGUODATEPICKERBORRAR(){
+    private fun ANTIGUODATEPICKERBORRAR() {
 
         /*val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -91,7 +89,7 @@ class Add_Task_Activity : AppCompatActivity() {
         datePickerDialog.show()*/
     }
 
-    private fun createCustomTimePicker(){
+    private fun createCustomTimePicker() {
 
         val timePicker = binding.customTimePicker
         timePicker.setIs24HourView(true)
@@ -102,7 +100,7 @@ class Add_Task_Activity : AppCompatActivity() {
         })
     }
 
-    private fun createDatePickerAndTimePicker(){
+    private fun createDatePickerAndTimePicker() {
 
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -115,10 +113,11 @@ class Add_Task_Activity : AppCompatActivity() {
         datePickerTimeline.setInitialDate(year, month, day)
 
 
+
+
         datePickerTimeline.setOnDateSelectedListener(object : OnDateSelectedListener {
             @SuppressLint("SetTextI18n")
             override fun onDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int) {
-
 
 
                 val formatedDay: String
@@ -136,8 +135,10 @@ class Add_Task_Activity : AppCompatActivity() {
                     month.toString()
                 }
 
+                binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
 
-                //Creamos el DatePicker
+
+                //Creamos el timepicker  //ESTE NO HACE NADA
                 val timePicker = binding.customTimePicker
                 timePicker.setIs24HourView(true)
                 timePicker.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute ->
@@ -149,13 +150,12 @@ class Add_Task_Activity : AppCompatActivity() {
 
                     //Creamos nueva instancia de calendario con los valores elegidos
                     val newCalendar = Calendar.getInstance()
-                    newCalendar.set(Calendar.YEAR,year)
+                    newCalendar.set(Calendar.YEAR, year)
                     newCalendar.set(Calendar.MONTH, month)
-                    newCalendar.set(Calendar.DAY_OF_MONTH,day)
-                    newCalendar.set(Calendar.HOUR_OF_DAY,hour)
-                    newCalendar.set(Calendar.MINUTE,min)
+                    newCalendar.set(Calendar.DAY_OF_MONTH, day)
+                    newCalendar.set(Calendar.HOUR_OF_DAY, hour)
+                    newCalendar.set(Calendar.MINUTE, min)
 
-                    binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
 
                     binding.calendarButton.setOnClickListener {
 
@@ -196,7 +196,7 @@ class Add_Task_Activity : AppCompatActivity() {
 
 
 
-        if (userName.isEmpty() || email.isEmpty() || actualDate.isEmpty() || title.isEmpty() || description.isEmpty() || taskDate.isEmpty() || status.isEmpty()) {
+        if (userName.isEmpty() || email.isEmpty() || actualDate.isEmpty() || title.isEmpty() || description.isEmpty() || taskDate.isEmpty()) {
             Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
         } else {
             addTaskToDatabase(userUid, taskId!!, userName, email, actualDate, title, description, taskDate, status)
@@ -207,8 +207,10 @@ class Add_Task_Activity : AppCompatActivity() {
 
     }
 
-    private fun addTaskToDatabase(userUid: String, taskId: String, userName: String, email: String, actualDate: String,
-        title: String, description: String, taskDate: String, status: String) {
+    private fun addTaskToDatabase(
+        userUid: String, taskId: String, userName: String, email: String, actualDate: String,
+        title: String, description: String, taskDate: String, status: String
+    ) {
 
 
         val task = Task(userUid, taskId, userName, email, actualDate, title, description, taskDate, status)
@@ -229,11 +231,21 @@ class Add_Task_Activity : AppCompatActivity() {
 
     private fun getAndSetData() {
 
-        val name = intent.getStringExtra("name")
-        val email = intent.getStringExtra("email")
+        var name = ""
+        var surname = ""
 
-        binding.tvUserName.setText(name)
-        binding.tvEmail.setText(email)
+        db.child("users").child(auth.currentUser!!.uid).child("name").get().addOnSuccessListener {
+            name = it.value.toString()
+            db.child("users").child(auth.currentUser!!.uid).child("surname").get().addOnSuccessListener {
+                surname = it.value.toString()
+                binding.tvUserName.text = "$name $surname"
+            }
+        }
+
+
+
+
+        binding.tvEmail.text = auth.currentUser!!.email.toString()
     }
 
     private fun getDateAndTime() {
@@ -242,13 +254,19 @@ class Add_Task_Activity : AppCompatActivity() {
             Locale.getDefault()
         ).format(System.currentTimeMillis())
 
-        binding.tvActualDate.setText(registerDateAndTime)
+        binding.tvActualDate.text = registerDateAndTime
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        finish()
+
         return super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

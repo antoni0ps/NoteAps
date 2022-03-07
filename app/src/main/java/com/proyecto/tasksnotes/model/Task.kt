@@ -11,7 +11,7 @@ class Task {
     var taskDate: String? = null
     var status: String? = null
 
-    constructor() {}
+    constructor()
 
     constructor(userUid: String?, taskId: String?, user: String?, email: String?, registryDate: String?, title: String?, description: String?, finishDate: String?, status: String?) {
         this.userUid = userUid
