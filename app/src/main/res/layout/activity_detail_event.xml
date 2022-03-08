@@ -14,10 +14,10 @@
         <!--DATOS DEL EVENTO-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            android:background="@drawable/background_clear"
-            android:layout_gravity="center"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/custom_timepicker"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -41,7 +41,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:text="Nombre usuario"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -53,7 +53,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="nombre usuario"
-                android:textColor="@color/dark_grey"
+                android:textColor="@color/darker_grey"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -79,7 +79,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:text="Email usuario"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -91,8 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/dark_grey"
                 android:text="email"
+                android:textColor="@color/darker_grey"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -116,8 +116,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/dark_grey"
                     android:text="Título"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -130,7 +130,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="Título"
-                android:textColor="@color/dark_grey"
+                android:textColor="@color/darker_grey"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:text="Descripción"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -169,7 +169,7 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="5dp"
                 android:text="descripción"
-                android:textColor="@color/dark_grey"
+                android:textColor="@color/darker_grey"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -194,21 +194,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/dark_grey"
                     android:text="Fecha y hora del evento"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <!--DATO - FECHA NOTA-->
             <TextView
-                android:id="@+id/finishDate_detail"
+                android:id="@+id/dateAndTime_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/dark_grey"
-                android:text="fecha finalizacion"
+                android:text="fecha y hora"
+                android:textColor="@color/darker_grey"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 

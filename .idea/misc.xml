@@ -7,6 +7,7 @@
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/background_clear.xml" value="0.36256410256410254" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/custom_timepicker.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/date_background.xml" value="0.36822916666666666" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/gradient_background_border.xml" value="0.36256410256410254" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/ic_add.xml" value="0.36822916666666666" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/ic_button.xml" value="0.36256410256410254" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/ic_calendar.xml" value="0.36256410256410254" />
@@ -23,15 +24,16 @@
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/ic_unchecked_background.xml" value="0.36256410256410254" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/drawable/info_image.xml" value="0.36256410256410254" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout-v26/activity_add_note.xml" value="0.35208333333333336" />
-        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_add_event.xml" value="0.25" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_add_event.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_add_note.xml" value="0.35208333333333336" />
-        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_add_task.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_add_task.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_archived_notes.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_detail.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_detail_event.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_detail_note.xml" value="0.33" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_list_events.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_list_notes.xml" value="0.35208333333333336" />
-        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_list_tasks.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_list_tasks.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_profile.xml" value="0.35208333333333336" />
@@ -40,8 +42,9 @@
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_splash_screen.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/activity_task_detail.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/delete_note_dialog.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/item_event.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/item_note.xml" value="0.35208333333333336" />
-        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/item_task.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/item_task.xml" value="0.33" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/layout/options_dialog.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/menu/add_menu.xml" value="0.35208333333333336" />
         <entry key="..\:/Users/Antonio/AndroidStudioProjects/TasksNotes/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21145833333333333" />

@@ -13,6 +13,7 @@ import com.proyecto.tasksnotes.list.List_Notes
 import com.proyecto.tasksnotes.list.List_Tasks
 import com.proyecto.tasksnotes.about.About_Activity
 import com.proyecto.tasksnotes.databinding.ActivityMenuBinding
+import com.proyecto.tasksnotes.list.List_Events
 
 class MenuActivity : AppCompatActivity() {
 
@@ -33,19 +34,12 @@ class MenuActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
-        val actionBar = supportActionBar
-        actionBar!!.title = ""
-
 
         /* Llamamos a la funcion loadData al iniciar para comprobar si existe un usuario logueado,
         si existe el usuario se le envia al menu principal, en caso contrario se envía a la
         actividad de login */
 
         loadData()
-
-
-
-
 
         binding.myTasksButton.setOnClickListener {
             startActivity(Intent(this, List_Tasks::class.java))
@@ -54,6 +48,11 @@ class MenuActivity : AppCompatActivity() {
         binding.myNotesButton.setOnClickListener {
             startActivity(Intent(this, List_Notes::class.java))
         }
+
+        binding.myEventsButton.setOnClickListener {
+            startActivity(Intent(this,List_Events::class.java))
+        }
+
         binding.aboutButton.setOnClickListener {
             startActivity(Intent(this, About_Activity::class.java))
         }
@@ -95,6 +94,7 @@ class MenuActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {}
         })
     }
+
 
 
     private fun logOutApp() {

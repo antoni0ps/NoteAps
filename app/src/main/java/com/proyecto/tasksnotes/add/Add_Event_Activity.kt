@@ -12,7 +12,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.proyecto.tasksnotes.databinding.ActivityAddEventBinding
 import com.proyecto.tasksnotes.model.Event
-import com.proyecto.tasksnotes.model.Task
 import com.vivekkaushik.datepicker.OnDateSelectedListener
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,13 +33,34 @@ class Add_Event_Activity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         newCalendar = Calendar.getInstance()
 
-        createActionbar()
+//        createActionbar()
         getAndSetData()
         getDateAndTime()
         createDatePickerAndTimePicker()
 
 
 
+    }
+
+    private fun getEventData() {
+
+        val currentUser = auth.currentUser
+        val email = currentUser?.email.toString()
+        val userName = binding.tvUserName.text.toString()
+        val title = binding.etTitle.text.toString()
+        val description = binding.etDescription.text.toString()
+        val eventDate = binding.tvFinishDate.text.toString()
+        val eventTime = binding.tvTime.text.toString()
+        val eventId = db.push().key
+        val userUid = currentUser!!.uid
+
+        if (userName.isEmpty() || email.isEmpty() || title.isEmpty() || description.isEmpty()) {
+            Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
+        } else {
+            addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
+            Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
+            onBackPressed()
+        }
     }
 
     private fun addEventToDatabase(
@@ -57,9 +77,27 @@ class Add_Event_Activity : AppCompatActivity() {
     private fun onCalendarButtonPressed(newCalendar: Calendar) {
         binding.calendarButton.setOnClickListener {
 
-            if (binding.tvCalendarDate.text.isEmpty() || binding.tvTime.text.isEmpty()) {
+            val currentUser = auth.currentUser
+            val email = currentUser?.email.toString()
+            val userName = binding.tvUserName.text.toString()
+            val title = binding.etTitle.text.toString()
+            val description = binding.etDescription.text.toString()
+            val eventDate = binding.tvFinishDate.text.toString()
+            val eventTime = binding.tvTime.text.toString()
+            val eventId = db.push().key
+            val userUid = currentUser!!.uid
+
+            if (userName.isEmpty() || email.isEmpty() || title.isEmpty() || description.isEmpty()) {
+                Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
+            }
+            else if (eventDate.isEmpty() || eventTime.isEmpty()) {
                 Toast.makeText(applicationContext, "Debes elegir fecha y hora", Toast.LENGTH_SHORT).show()
             } else {
+
+                addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
+                Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
+                onBackPressed()
+
                 val intent = Intent()
                 intent.action = Intent.ACTION_EDIT
                 intent.type = "vnd.android.cursor.item/event"
@@ -67,6 +105,8 @@ class Add_Event_Activity : AppCompatActivity() {
                 intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
                 intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
                 intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
+
+
                 startActivity(intent)
             }
         }
@@ -113,7 +153,7 @@ class Add_Event_Activity : AppCompatActivity() {
                 newCalendar.set(Calendar.MONTH, month)
                 newCalendar.set(Calendar.DAY_OF_MONTH, day)
 
-                binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
+                binding.tvFinishDate.text = "$formatedDay/$formatedMonth/$year"
             }
 
             override fun onDisabledDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int, isDisabled: Boolean) {
@@ -174,7 +214,7 @@ class Add_Event_Activity : AppCompatActivity() {
     private fun createActionbar() {
         val actionBar = supportActionBar
         with(actionBar) {
-            this!!.title = ""
+            this!!.title = "Nuevo Evento"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }

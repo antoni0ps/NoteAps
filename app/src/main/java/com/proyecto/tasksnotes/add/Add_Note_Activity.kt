@@ -29,7 +29,7 @@ class Add_Note_Activity : AppCompatActivity() {
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
 
-        createActionBar()
+//        createActionBar()
 
 
     }

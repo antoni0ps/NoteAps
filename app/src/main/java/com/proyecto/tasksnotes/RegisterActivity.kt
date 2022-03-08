@@ -35,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
 
         databaseReference = db.getReference("users")
 
-        createActionBar()
+//        createActionBar()
 
 
 

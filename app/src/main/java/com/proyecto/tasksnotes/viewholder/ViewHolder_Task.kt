@@ -13,8 +13,8 @@ class ViewHolder_Task(var mView: View) : RecyclerView.ViewHolder(mView) {
 
 
 
-    interface ClickListener {
-        fun onItemClick(view: View?, position: Int) //Se ejecuta al pulsar en el item
+    interface ClickListener : ViewHolder_Event.ClickListener {
+        override fun onItemClick(view: View?, position: Int) //Se ejecuta al pulsar en el item
 //        fun onItemLongClick(view: View?, position: Int) //Se ejecuta al mantener presionado el item
     }
 

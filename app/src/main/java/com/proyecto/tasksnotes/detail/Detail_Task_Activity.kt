@@ -14,7 +14,7 @@ class Detail_Task_Activity : AppCompatActivity() {
         binding = ActivityTaskDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        createActionBar()
+//        createActionBar()
         getAndSetData()
     }
 

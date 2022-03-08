@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        createActionBar()
+//        createActionBar()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

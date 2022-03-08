@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Nombre usuario"
-            android:textSize="18sp"
-             />
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp" />
 
         <!--CORREO DEL USUARIO-->
         <TextView
@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"
+            android:textColor="@color/dark_grey"
             android:textSize="18sp" />
 
         <!--ICONO - TEXTVIEW-->
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="Fecha de registro: "
+                android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
             <!--FECHA Y HORA ACTUAL DEL DISPOSITIVO-->
@@ -56,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:hint="Fecha y hora actual"
+                android:textColor="@color/dark_grey"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -68,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Título"
+            android:textColor="@color/dark_grey"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -80,27 +84,26 @@
             android:gravity="start"
             android:hint="Descripción"
             android:minHeight="150dp"
+            android:textColor="@color/dark_grey"
             android:textSize="20sp" />
 
 
         <com.vivekkaushik.datepicker.DatePickerTimeline
             android:id="@+id/datePickerTimeline"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/gradient_background_border" />
+            android:layout_height="90dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/gradient_background_border"
+            app:dateTextColor="@color/darker_grey"
+            app:dayTextColor="@color/darker_grey"
+            app:monthTextColor="@color/darker_grey" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
-
-
-
+            android:orientation="horizontal"
+            android:weightSum="2">
 
 
             <!--VISUALIZAR FECHA ELEGIDA-->
@@ -116,83 +119,49 @@
             android:layout_marginTop="100dp"
             android:text="No finalizada"
             android:textSize="20sp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2">
 
-            <TimePicker
-                android:layout_margin="5dp"
-                android:id="@+id/customTimePicker"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:theme="@style/TimepickerStyle"
-                android:timePickerMode="spinner"
-                android:layout_gravity="center"
-                android:background="@drawable/custom_timepicker"
-                android:layout_weight="1"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/background_clear"
                 android:orientation="vertical"
-                android:background="@drawable/custom_timepicker"
-                android:weightSum="3">
+                android:weightSum="2">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fecha y hora"
-                    android:textColor="@color/black"
                     android:layout_marginTop="8dp"
-                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:text="Fecha de finalización"
                     android:textAlignment="center"
-                    android:layout_weight="1"/>
+                    android:textColor="@color/darker_grey"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tvCalendarDate"
+                    android:id="@+id/tvFinishDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:hint="00/00/0000"
-                    android:textColor="@color/black"
+                    android:paddingBottom="5dp"
                     android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:layout_weight="1"/>
+                    android:textColor="@color/darker_grey"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="00:00 "
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:textAlignment="center"
-                    android:layout_weight="1"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-
-
-
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <!--BOTÓN PARA ABRIR CALENDARIO-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/calendarButton"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_height="wrap_content"
-            android:elevation="5dp"
-            android:translationZ="20dp"
-            android:text="Añadir evento al calendario"
-            app:icon="@drawable/ic_calendar"
-            android:layout_gravity="center"/>
-
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -39,14 +39,16 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_time" />
+                android:src="@drawable/ic_time"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="Fecha de registro: "
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone"/>
 
             <!--FECHA Y HORA ACTUAL DEL DISPOSITIVO-->
             <TextView
@@ -56,7 +58,8 @@
                 android:layout_marginStart="8dp"
                 android:hint="Fecha y hora actual"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -86,6 +89,9 @@
             android:id="@+id/datePickerTimeline"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:dateTextColor="@color/darker_grey"
+            app:dayTextColor="@color/darker_grey"
+            app:monthTextColor="@color/darker_grey"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -146,15 +152,16 @@
                     android:layout_weight="1"
                     android:text="Fecha y hora"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tvCalendarDate"
+                    android:id="@+id/tvFinishDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="00/00/0000"
+                    android:textColorHint="@color/darker_grey"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
@@ -165,6 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="00:00 "
+                    android:textColorHint="@color/darker_grey"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
@@ -182,9 +190,12 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:elevation="5dp"
+            android:textColor="@color/darker_grey"
+            android:background="@drawable/gradient_background_border"
             android:text="Añadir evento al calendario"
-            android:translationZ="20dp"
-            app:icon="@drawable/ic_calendar" />
+            android:translationZ="2dp"
+            app:icon="@drawable/ic_calendar"
+            app:iconTint="@color/darker_grey"/>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

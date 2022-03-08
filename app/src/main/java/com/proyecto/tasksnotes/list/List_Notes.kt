@@ -22,7 +22,6 @@ import com.proyecto.tasksnotes.detail.Detail_Note_Activity
 import com.proyecto.tasksnotes.model.Note
 import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.add.Add_Note_Activity
-import com.proyecto.tasksnotes.databinding.ActivityAddNoteBinding
 import com.proyecto.tasksnotes.viewholder.ViewHolder_Note
 import com.proyecto.tasksnotes.databinding.ActivityListNotesBinding
 import java.util.*
@@ -59,14 +58,12 @@ class List_Notes : AppCompatActivity() {
             startActivity(intent)
         }
 
-        createActionBar()
+//        createActionBar()
         listNotes()
 
     }
 
     private fun listNotes() {
-
-
 
         val query = databaseReference.orderByChild("userUid").equalTo(firebaseUser.uid)
         options = FirebaseRecyclerOptions.Builder<Note>().setQuery(query, Note::class.java).build()
@@ -85,11 +82,12 @@ class List_Notes : AppCompatActivity() {
                 holder.setOnClickListener(object: ViewHolder_Note.ClickListener{
                     override fun onItemClick(view: View?, position: Int) {
 
+
                         //obtenerlos datos de la nota
-                        val title = getItem(position).title
-                        val content = getItem(position).content
-                        val colorCode = getItem(position).colorCode
-                        val noteId = getItem(position).noteId
+                        val title = getItem(holder.bindingAdapterPosition).title
+                        val content = getItem(holder.bindingAdapterPosition).content
+                        val colorCode = getItem(holder.bindingAdapterPosition).colorCode
+                        val noteId = getItem(holder.bindingAdapterPosition).noteId
 
 
                         //Enviar datos de la nota a la actividad de detalle
@@ -124,6 +122,7 @@ class List_Notes : AppCompatActivity() {
                                         ds.ref.removeValue()
                                             .addOnSuccessListener {
                                                 Toast.makeText(applicationContext, "Nota eliminada", Toast.LENGTH_SHORT).show()
+
                                             }
                                             .addOnFailureListener {
                                                 Toast.makeText(applicationContext, "No se pudo eliminar la nota", Toast.LENGTH_SHORT).show()
@@ -148,8 +147,8 @@ class List_Notes : AppCompatActivity() {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Note {
 
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
-                val noteViewHolder = ViewHolder_Note(view)
-                return noteViewHolder
+                return ViewHolder_Note(view)
+
             }
         }
 

@@ -30,7 +30,7 @@ class Detail_Note_Activity : AppCompatActivity() {
 
         db = FirebaseDatabase.getInstance().reference
 
-        createActionBar()
+//        createActionBar()
         getAndSetData()
     }
 

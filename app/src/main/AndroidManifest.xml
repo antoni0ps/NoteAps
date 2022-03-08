@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TasksNotes">
         <activity
+            android:name=".list.List_Events"
+            android:exported="false" />
+        <activity
             android:name=".add.Add_Event_Activity"
             android:exported="false" />
         <activity

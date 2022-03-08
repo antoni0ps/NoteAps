@@ -17,6 +17,7 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginTop="16dp"
         android:id="@+id/infoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
             android:layout_margin="5dp"
             app:cardCornerRadius="10dp"
             android:elevation="5dp"
-            android:translationZ="5dp">
+            android:translationZ="1dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -60,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:text="Bienvenido(a)"
-                        android:textColor="@color/white"
+                        android:textColor="@color/darker_grey"
                         android:textSize="20sp" />
 
                     <TextView
@@ -69,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:text="nombre"
-                        android:textColor="@color/white"
+                        android:textColor="@color/darker_grey"
                         android:textSize="18sp" />
 
                     <TextView
@@ -78,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:text="email"
-                        android:textColor="@color/white"
+                        android:textColor="@color/darker_grey"
                         android:textSize="18sp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -121,7 +122,7 @@
             android:elevation="8dp"
             android:enabled="false"
             android:padding="0.2dp"
-            android:translationZ="5dp"
+            android:translationZ="1dp"
             app:cardCornerRadius="10dp">
 
             <TextView
@@ -154,9 +155,9 @@
                     android:text="MIS NOTAS"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:textColor="@color/darker_grey"
                     android:textSize="24sp"
-                    android:translationZ="5dp" />
+                    android:translationZ="1dp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -180,7 +181,7 @@
             android:elevation="8dp"
             android:enabled="false"
             android:padding="0.2dp"
-            android:translationZ="5dp"
+            android:translationZ="1dp"
             app:cardCornerRadius="10dp">
 
             <TextView
@@ -212,7 +213,7 @@
                     android:gravity="center"
                     android:fontFamily="@font/roboto"
                     android:text="MIS TAREAS"
-                    android:textColor="@color/white"
+                    android:textColor="@color/darker_grey"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -238,7 +239,7 @@
             android:elevation="8dp"
             android:enabled="false"
             android:padding="0.2dp"
-            android:translationZ="8dp"
+            android:translationZ="1dp"
             app:cardCornerRadius="10dp">
 
             <TextView
@@ -269,10 +270,9 @@
                     android:gravity="center"
                     android:text="MIS EVENTOS"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/darker_grey"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:translationZ="20dp" />
+                    android:textStyle="bold" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

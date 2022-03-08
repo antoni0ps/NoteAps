@@ -43,7 +43,7 @@ class Add_Task_Activity : AppCompatActivity() {
         newCalendar = Calendar.getInstance()
 
 
-        createActionBar()
+//        createActionBar()
         getAndSetData()
         getDateAndTime()
         createDatePickerAndTimePicker()
@@ -61,11 +61,6 @@ class Add_Task_Activity : AppCompatActivity() {
 
         //Establecemos la fecha de inicio del calendario
         datePickerTimeline.setInitialDate(year, month, day)
-
-
-        //Creamos el timepicker
-        val timePicker = binding.customTimePicker
-        timePicker.setIs24HourView(true)
 
 
         datePickerTimeline.setOnDateSelectedListener(object : OnDateSelectedListener {
@@ -92,58 +87,16 @@ class Add_Task_Activity : AppCompatActivity() {
                 newCalendar.set(Calendar.MONTH, month)
                 newCalendar.set(Calendar.DAY_OF_MONTH, day)
 
-                binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
+                binding.tvFinishDate.text = "$formatedDay/$formatedMonth/$year"
             }
 
             override fun onDisabledDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int, isDisabled: Boolean) {
             }
         })
 
-        //Establecemos las acciones que se realizarán al seleccionar una hora
-        timePicker.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute ->
-
-            val formatedHour = if (hourOfDay < 10) {
-                "0$hourOfDay"
-            } else {
-                hourOfDay.toString()
-            }
-
-            val formatedMin = if (minute < 10) {
-                "0$minute"
-            } else {
-                minute.toString()
-            }
-
-            newCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-            newCalendar.set(Calendar.MINUTE, minute)
-
-            binding.tvTime.text = "$formatedHour : $formatedMin"
-
-
-        })
-
-        //funcion que se llama al pulsar el boton de añadir al calendario
-        onCalendarButtonPressed(newCalendar)
     }
 
 
-    private fun onCalendarButtonPressed(newCalendar: Calendar) {
-        binding.calendarButton.setOnClickListener {
-
-            if (binding.tvCalendarDate.text.isEmpty() || binding.tvTime.text.isEmpty()) {
-                Toast.makeText(applicationContext, "Debes elegir fecha y hora", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent()
-                intent.action = Intent.ACTION_EDIT
-                intent.type = "vnd.android.cursor.item/event"
-
-                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
-                intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
-                intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
-                startActivity(intent)
-            }
-        }
-    }
 
     private fun getTaskData() {
 
@@ -153,7 +106,7 @@ class Add_Task_Activity : AppCompatActivity() {
         val actualDate = binding.tvActualDate.text.toString()
         val title = binding.etTitle.text.toString()
         val description = binding.etDescription.text.toString()
-        val taskDate = binding.tvCalendarDate.text.toString()
+        val taskDate = binding.tvFinishDate.text.toString()
         val status = binding.tvStatus.text.toString()
         val taskId = db.push().key
         val userUid = currentUser!!.uid
@@ -181,7 +134,7 @@ class Add_Task_Activity : AppCompatActivity() {
     private fun createActionBar() {
         val actionBar = supportActionBar
         with(actionBar) {
-            this!!.title = ""
+            this!!.title = "Nueva Tarea"
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
         }

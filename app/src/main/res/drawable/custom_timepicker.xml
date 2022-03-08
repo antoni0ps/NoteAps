@@ -3,5 +3,10 @@
 
     <solid android:color="@color/background_clear"/>
 
+    <gradient
+        android:startColor="@color/background_clear"
+        android:endColor="@color/primary"
+        android:type="radial"
+        android:gradientRadius="2000"/>
     <corners android:radius="15dp"/>
 </shape>

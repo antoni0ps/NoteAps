@@ -55,7 +55,7 @@ class List_Tasks : AppCompatActivity() {
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
 
-        createActionBar()
+//        createActionBar()
         listTasks()
         dialog = Dialog(this)
         binding.addTaskButton.setOnClickListener {

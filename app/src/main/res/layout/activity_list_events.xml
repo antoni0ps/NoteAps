@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".list.List_Tasks">
+    tools:context=".list.List_Events">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewTasks"
+        android:id="@+id/recyclerViewEvents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTaskButton"
+        android:id="@+id/addEventButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"

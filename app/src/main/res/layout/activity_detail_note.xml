@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:hint="Título"
+            android:textColor="@color/dark_grey"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,6 +31,7 @@
             android:paddingTop="8dp"
             android:paddingStart="8dp"
             android:hint="Descripción"
+            android:textColor="@color/dark_grey"
             android:autoSizeMaxTextSize="500dp"
             android:textStyle="italic"
             android:textSize="20sp"
