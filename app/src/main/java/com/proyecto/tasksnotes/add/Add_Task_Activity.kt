@@ -28,6 +28,7 @@ class Add_Task_Activity : AppCompatActivity() {
     private lateinit var binding: ActivityAddTaskBinding
     private lateinit var db: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    private lateinit var newCalendar: Calendar
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -39,65 +40,13 @@ class Add_Task_Activity : AppCompatActivity() {
 
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
-
-
-
-
-
+        newCalendar = Calendar.getInstance()
 
 
         createActionBar()
         getAndSetData()
         getDateAndTime()
         createDatePickerAndTimePicker()
-        createCustomTimePicker()
-
-    }
-
-    private fun ANTIGUODATEPICKERBORRAR() {
-
-        /*val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{ view, mYear, mMonth, mDay ->
-
-            newYear = mYear
-            newMonth = month
-            newDay = mDay
-
-            val formatedDay: String
-            val formatedMonth: String
-            val month = mMonth + 1
-
-            formatedDay = if (mDay < 10) {
-                "0$mDay"
-            } else {
-                mDay.toString()
-            }
-            formatedMonth = if (month < 10) {
-                "0$month"
-            } else {
-                month.toString()
-            }
-
-            binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$mYear"
-
-        }, year, month, day)
-
-        datePickerDialog.show()*/
-    }
-
-    private fun createCustomTimePicker() {
-
-        val timePicker = binding.customTimePicker
-        timePicker.setIs24HourView(true)
-
-        timePicker.setOnTimeChangedListener(OnTimeChangedListener { timePicker, hourOfDay, minute ->
-
-            binding.tvTime.setText("$hourOfDay : $minute")
-        })
     }
 
     private fun createDatePickerAndTimePicker() {
@@ -107,12 +56,16 @@ class Add_Task_Activity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+        //Creamos el datepicker
         val datePickerTimeline = binding.datePickerTimeline
 
         //Establecemos la fecha de inicio del calendario
         datePickerTimeline.setInitialDate(year, month, day)
 
 
+        //Creamos el timepicker
+        val timePicker = binding.customTimePicker
+        timePicker.setIs24HourView(true)
 
 
         datePickerTimeline.setOnDateSelectedListener(object : OnDateSelectedListener {
@@ -135,50 +88,61 @@ class Add_Task_Activity : AppCompatActivity() {
                     month.toString()
                 }
 
+                newCalendar.set(Calendar.YEAR, year)
+                newCalendar.set(Calendar.MONTH, month)
+                newCalendar.set(Calendar.DAY_OF_MONTH, day)
+
                 binding.tvCalendarDate.text = "$formatedDay/$formatedMonth/$year"
-
-
-                //Creamos el timepicker  //ESTE NO HACE NADA
-                val timePicker = binding.customTimePicker
-                timePicker.setIs24HourView(true)
-                timePicker.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute ->
-
-
-                    val hour = hourOfDay
-                    val min = minute
-                    binding.tvTime.text = "$hourOfDay : $minute"
-
-                    //Creamos nueva instancia de calendario con los valores elegidos
-                    val newCalendar = Calendar.getInstance()
-                    newCalendar.set(Calendar.YEAR, year)
-                    newCalendar.set(Calendar.MONTH, month)
-                    newCalendar.set(Calendar.DAY_OF_MONTH, day)
-                    newCalendar.set(Calendar.HOUR_OF_DAY, hour)
-                    newCalendar.set(Calendar.MINUTE, min)
-
-
-                    binding.calendarButton.setOnClickListener {
-
-                        val intent = Intent()
-                        intent.action = Intent.ACTION_EDIT
-                        intent.type = "vnd.android.cursor.item/event"
-
-                        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
-                        intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
-                        intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
-                        startActivity(intent)
-
-                    }
-
-                })
-
-
             }
 
             override fun onDisabledDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int, isDisabled: Boolean) {
-
             }
         })
+
+        //Establecemos las acciones que se realizarán al seleccionar una hora
+        timePicker.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute ->
+
+            val formatedHour = if (hourOfDay < 10) {
+                "0$hourOfDay"
+            } else {
+                hourOfDay.toString()
+            }
+
+            val formatedMin = if (minute < 10) {
+                "0$minute"
+            } else {
+                minute.toString()
+            }
+
+            newCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            newCalendar.set(Calendar.MINUTE, minute)
+
+            binding.tvTime.text = "$formatedHour : $formatedMin"
+
+
+        })
+
+        //funcion que se llama al pulsar el boton de añadir al calendario
+        onCalendarButtonPressed(newCalendar)
+    }
+
+
+    private fun onCalendarButtonPressed(newCalendar: Calendar) {
+        binding.calendarButton.setOnClickListener {
+
+            if (binding.tvCalendarDate.text.isEmpty() || binding.tvTime.text.isEmpty()) {
+                Toast.makeText(applicationContext, "Debes elegir fecha y hora", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent()
+                intent.action = Intent.ACTION_EDIT
+                intent.type = "vnd.android.cursor.item/event"
+
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
+                intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
+                startActivity(intent)
+            }
+        }
     }
 
     private fun getTaskData() {
@@ -194,8 +158,6 @@ class Add_Task_Activity : AppCompatActivity() {
         val taskId = db.push().key
         val userUid = currentUser!!.uid
 
-
-
         if (userName.isEmpty() || email.isEmpty() || actualDate.isEmpty() || title.isEmpty() || description.isEmpty() || taskDate.isEmpty()) {
             Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
         } else {
@@ -203,20 +165,16 @@ class Add_Task_Activity : AppCompatActivity() {
             Toast.makeText(this, "Agregando tarea a la Base de Datos...", Toast.LENGTH_SHORT).show()
             onBackPressed()
         }
-
-
     }
 
     private fun addTaskToDatabase(
         userUid: String, taskId: String, userName: String, email: String, actualDate: String,
         title: String, description: String, taskDate: String, status: String
     ) {
-
-
         val task = Task(userUid, taskId, userName, email, actualDate, title, description, taskDate, status)
         db.child("users").child(auth.currentUser!!.uid).child("tasks").child(taskId).setValue(task)
             .addOnSuccessListener {
-
+                Toast.makeText(this,"Tarea agregada con éxito",Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -241,10 +199,6 @@ class Add_Task_Activity : AppCompatActivity() {
                 binding.tvUserName.text = "$name $surname"
             }
         }
-
-
-
-
         binding.tvEmail.text = auth.currentUser!!.email.toString()
     }
 
@@ -255,12 +209,10 @@ class Add_Task_Activity : AppCompatActivity() {
         ).format(System.currentTimeMillis())
 
         binding.tvActualDate.text = registerDateAndTime
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
-
         return super.onSupportNavigateUp()
     }
 
@@ -280,7 +232,6 @@ class Add_Task_Activity : AppCompatActivity() {
         when (item.itemId) {
 
             R.id.addToDatabase -> getTaskData()
-
         }
         return super.onOptionsItemSelected(item)
     }

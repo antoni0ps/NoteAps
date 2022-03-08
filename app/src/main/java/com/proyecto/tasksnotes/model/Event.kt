@@ -7,7 +7,8 @@ data class Event(
     var email: String?,
     var title: String?,
     var description: String?,
-    var taskDate: String?,
+    var eventDate: String?,
+    var eventHour: String
 ){
-    constructor() : this("","","","","","","")
+    constructor() : this("","","","","","","","")
 }
