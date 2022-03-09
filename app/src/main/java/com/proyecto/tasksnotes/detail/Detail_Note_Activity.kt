@@ -14,12 +14,10 @@ import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.databinding.ActivityDetailNoteBinding
 
 
-
-
 class Detail_Note_Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailNoteBinding
-    private lateinit var db : DatabaseReference
+    private lateinit var db: DatabaseReference
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +28,10 @@ class Detail_Note_Activity : AppCompatActivity() {
 
         db = FirebaseDatabase.getInstance().reference
 
-//        createActionBar()
         getAndSetData()
+        binding.noteSaveButton.setOnClickListener {
+            updateDatainDatabase()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -42,52 +42,24 @@ class Detail_Note_Activity : AppCompatActivity() {
 
         binding.tvTitle.setText(title)
         binding.tvContent.setText(content)
-        binding.tvContent.setBackgroundColor(resources.getColor(intent.getIntExtra("colorCode",0),null))
+        binding.tvContent.setBackgroundColor(resources.getColor(intent.getIntExtra("colorCode", 0), null))
     }
 
     private fun updateDatainDatabase() {
 
-
-
         val tableName = "notes"
         val noteId = intent.getStringExtra("noteId")
         db.child(tableName).child(noteId!!).child("title").setValue(binding.tvTitle.text.toString())
-                db.child(tableName).child(noteId).child("content").setValue(binding.tvContent.text.toString())
+        db.child(tableName).child(noteId).child("content").setValue(binding.tvContent.text.toString())
             .addOnCompleteListener {
                 Toast.makeText(this, "Nota Actualizada con éxito.", Toast.LENGTH_SHORT).show()
                 onBackPressed()
-
             }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        menuInflater.inflate(R.menu.add_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-
-            R.id.addToDatabase -> updateDatainDatabase()
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Detalle"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 
 

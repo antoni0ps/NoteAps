@@ -35,22 +35,8 @@ class RegisterActivity : AppCompatActivity() {
 
         databaseReference = db.getReference("users")
 
-//        createActionBar()
-
-
-
         binding.registerButton.setOnClickListener {
             validateData()
-
-        }
-    }
-
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
         }
     }
 
@@ -134,9 +120,8 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+    override fun onBackPressed() {
         finish()
-        return super.onSupportNavigateUp()
+        super.onBackPressed()
     }
 }

@@ -29,8 +29,9 @@ class Add_Note_Activity : AppCompatActivity() {
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
 
-//        createActionBar()
-
+        binding.noteSaveButton.setOnClickListener {
+            getAndValidateData()
+        }
 
     }
 
@@ -79,33 +80,8 @@ class Add_Note_Activity : AppCompatActivity() {
         return colorCode[number]
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        menuInflater.inflate(R.menu.add_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-
-            R.id.addToDatabase -> getAndValidateData()
-        }
-
-        return super.onOptionsItemSelected(item)
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 }

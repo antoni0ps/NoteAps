@@ -28,15 +28,15 @@ import java.util.*
 
 class List_Notes : AppCompatActivity() {
 
-    private lateinit var binding : ActivityListNotesBinding
+    private lateinit var binding: ActivityListNotesBinding
     private lateinit var recyclerViewNotes: RecyclerView
     private lateinit var adapter: FirebaseRecyclerAdapter<Note, ViewHolder_Note>
     private lateinit var options: FirebaseRecyclerOptions<Note>
-    private lateinit var firebaseUser :FirebaseUser
-    private lateinit var auth : FirebaseAuth
+    private lateinit var firebaseUser: FirebaseUser
+    private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var layoutMan : StaggeredGridLayoutManager
+    private lateinit var layoutMan: StaggeredGridLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,19 +46,16 @@ class List_Notes : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firebaseUser = auth.currentUser!!
-
         recyclerViewNotes = binding.recyclerViewNotes
         recyclerViewNotes.setHasFixedSize(true)
         db = FirebaseDatabase.getInstance()
         databaseReference = db.getReference("notes")
 
         binding.addNoteButton.setOnClickListener {
-
-            val intent = Intent(this,Add_Note_Activity::class.java)
+            val intent = Intent(this, Add_Note_Activity::class.java)
             startActivity(intent)
         }
 
-//        createActionBar()
         listNotes()
 
     }
@@ -66,9 +63,9 @@ class List_Notes : AppCompatActivity() {
     private fun listNotes() {
 
         val query = databaseReference.orderByChild("userUid").equalTo(firebaseUser.uid)
-        options = FirebaseRecyclerOptions.Builder<Note>().setQuery(query, Note::class.java).build()
 
-        adapter = object : FirebaseRecyclerAdapter<Note, ViewHolder_Note>(options){
+        options = FirebaseRecyclerOptions.Builder<Note>().setQuery(query, Note::class.java).build()
+        adapter = object : FirebaseRecyclerAdapter<Note, ViewHolder_Note>(options) {
 
             @RequiresApi(Build.VERSION_CODES.M)
             override fun onBindViewHolder(holder: ViewHolder_Note, position: Int, model: Note) {
@@ -79,9 +76,8 @@ class List_Notes : AppCompatActivity() {
                 mCardView = holder.mView.findViewById(R.id.noteCard)
                 mCardView.setCardBackgroundColor(holder.mView.resources.getColor(colorCode!!, null))
 
-                holder.setOnClickListener(object: ViewHolder_Note.ClickListener{
+                holder.setOnClickListener(object : ViewHolder_Note.ClickListener {
                     override fun onItemClick(view: View?, position: Int) {
-
 
                         //obtenerlos datos de la nota
                         val title = getItem(holder.bindingAdapterPosition).title
@@ -89,36 +85,34 @@ class List_Notes : AppCompatActivity() {
                         val colorCode = getItem(holder.bindingAdapterPosition).colorCode
                         val noteId = getItem(holder.bindingAdapterPosition).noteId
 
-
                         //Enviar datos de la nota a la actividad de detalle
-                        val intent = Intent(applicationContext,Detail_Note_Activity::class.java)
+                        val intent = Intent(applicationContext, Detail_Note_Activity::class.java)
                         intent.putExtra("title_detail", title)
-                        intent.putExtra("content_detail",content)
-                        intent.putExtra("colorCode",colorCode)
+                        intent.putExtra("content_detail", content)
+                        intent.putExtra("colorCode", colorCode)
                         intent.putExtra("noteId", noteId)
                         startActivity(intent)
                     }
-
                 })
 
-                val menuIcon : ImageView = holder.mView.findViewById(R.id.item_note_menuIcon)
+                val menuIcon: ImageView = holder.mView.findViewById(R.id.item_note_menuIcon)
                 menuIcon.setOnClickListener {
 
                     val noteId = getItem(position).noteId
-                    val popupMenu = PopupMenu(applicationContext,menuIcon)
+                    val popupMenu = PopupMenu(applicationContext, menuIcon)
                     popupMenu.gravity = Gravity.END
                     popupMenu.menu.add("Eliminar").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
 
                         val builder = AlertDialog.Builder(this@List_Notes)
                         builder.setTitle("Eliminar nota")
                         builder.setMessage("¿Desea eliminar la nota?")
-                        builder.setPositiveButton("SI"){ dialogInterface,i->
+                        builder.setPositiveButton("SI") { dialogInterface, i ->
 
                             val query = databaseReference.orderByChild("noteId").equalTo(noteId)
-                            query.addListenerForSingleValueEvent(object: ValueEventListener{
+                            query.addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                                    for(ds in snapshot.children){
+                                    for (ds in snapshot.children) {
                                         ds.ref.removeValue()
                                             .addOnSuccessListener {
                                                 Toast.makeText(applicationContext, "Nota eliminada", Toast.LENGTH_SHORT).show()
@@ -129,10 +123,11 @@ class List_Notes : AppCompatActivity() {
                                             }
                                     }
                                 }
+
                                 override fun onCancelled(error: DatabaseError) {}
                             })
                         }
-                        builder.setNegativeButton("NO"){ dialogInterface,i->
+                        builder.setNegativeButton("NO") { dialogInterface, i ->
                             Toast.makeText(applicationContext, "La nota no ha sido eliminada", Toast.LENGTH_SHORT).show()
                         }
                         builder.create().show()
@@ -148,29 +143,17 @@ class List_Notes : AppCompatActivity() {
 
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
                 return ViewHolder_Note(view)
-
             }
         }
 
-
-
-        layoutMan = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        layoutMan = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerViewNotes.layoutManager = layoutMan
         recyclerViewNotes.adapter = adapter
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Mis Notas"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 
     override fun onStart() {

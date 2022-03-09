@@ -14,7 +14,6 @@ class Detail_Event_Activity : AppCompatActivity() {
         binding = ActivityDetailEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        createActionBar()
         getAndSetData()
     }
 
@@ -35,17 +34,8 @@ class Detail_Event_Activity : AppCompatActivity() {
 
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Detalles de la tarea"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 }

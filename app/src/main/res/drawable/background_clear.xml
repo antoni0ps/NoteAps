@@ -7,6 +7,7 @@
         android:startColor="@color/background_clear"
         android:endColor="@color/primary"
         android:type="radial"
-        android:angle="0"/>
+        android:angle="0"
+        android:gradientRadius="0dp"/>
     <corners android:radius= "10dp" />
 </shape>

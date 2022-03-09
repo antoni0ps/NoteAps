@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        createActionBar()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
@@ -55,15 +53,6 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT).show()
                 }
             }
-    }
-
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
     }
 
     private fun goToMenu() {

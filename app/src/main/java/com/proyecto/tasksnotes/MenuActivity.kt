@@ -20,8 +20,6 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var usuarios: DatabaseReference
-    private lateinit var name: String
-    private lateinit var email: String
     private lateinit var user: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +63,6 @@ class MenuActivity : AppCompatActivity() {
 
 
     private fun loadData() {
-
 
         user = auth.currentUser!!
 

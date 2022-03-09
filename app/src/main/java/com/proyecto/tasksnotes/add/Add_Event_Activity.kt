@@ -19,7 +19,7 @@ import java.util.*
 class Add_Event_Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddEventBinding
-    private lateinit var db :DatabaseReference
+    private lateinit var db: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var newCalendar: Calendar
 
@@ -33,35 +33,11 @@ class Add_Event_Activity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         newCalendar = Calendar.getInstance()
 
-//        createActionbar()
         getAndSetData()
         getDateAndTime()
         createDatePickerAndTimePicker()
-
-
-
     }
 
-    private fun getEventData() {
-
-        val currentUser = auth.currentUser
-        val email = currentUser?.email.toString()
-        val userName = binding.tvUserName.text.toString()
-        val title = binding.etTitle.text.toString()
-        val description = binding.etDescription.text.toString()
-        val eventDate = binding.tvFinishDate.text.toString()
-        val eventTime = binding.tvTime.text.toString()
-        val eventId = db.push().key
-        val userUid = currentUser!!.uid
-
-        if (userName.isEmpty() || email.isEmpty() || title.isEmpty() || description.isEmpty()) {
-            Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
-        } else {
-            addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
-            Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
-            onBackPressed()
-        }
-    }
 
     private fun addEventToDatabase(
         userUid: String, eventId: String, userName: String, email: String,
@@ -70,7 +46,7 @@ class Add_Event_Activity : AppCompatActivity() {
         val event = Event(userUid, eventId, userName, email, title, description, eventDate, eventHour)
         db.child("users").child(auth.currentUser!!.uid).child("events").child(eventId).setValue(event)
             .addOnSuccessListener {
-                Toast.makeText(this,"Evento agregado con éxito", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Evento agregado con éxito", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -89,25 +65,31 @@ class Add_Event_Activity : AppCompatActivity() {
 
             if (userName.isEmpty() || email.isEmpty() || title.isEmpty() || description.isEmpty()) {
                 Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
-            }
-            else if (eventDate.isEmpty() || eventTime.isEmpty()) {
+            } else if (eventDate.isEmpty() || eventTime.isEmpty()) {
                 Toast.makeText(applicationContext, "Debes elegir fecha y hora", Toast.LENGTH_SHORT).show()
             } else {
 
-                addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
-                Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
-                onBackPressed()
+                val switchButton = binding.switchButton
 
-                val intent = Intent()
-                intent.action = Intent.ACTION_EDIT
-                intent.type = "vnd.android.cursor.item/event"
+                if (switchButton.isChecked) {
+                    Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
+                    addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
+                    onBackPressed()
 
-                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
-                intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
-                intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_EDIT
+                    intent.type = "vnd.android.cursor.item/event"
+                    intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, newCalendar.timeInMillis)
+                    intent.putExtra(CalendarContract.Events.TITLE, binding.etTitle.text.toString())
+                    intent.putExtra(CalendarContract.Events.DESCRIPTION, binding.etDescription.text.toString())
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
+                    addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
+                    onBackPressed()
+                }
 
 
-                startActivity(intent)
             }
         }
     }
@@ -133,7 +115,6 @@ class Add_Event_Activity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int) {
 
-
                 val formatedDay: String
                 val formatedMonth: String
                 val mMonth = month + 1
@@ -148,7 +129,6 @@ class Add_Event_Activity : AppCompatActivity() {
                 } else {
                     month.toString()
                 }
-
                 newCalendar.set(Calendar.YEAR, year)
                 newCalendar.set(Calendar.MONTH, month)
                 newCalendar.set(Calendar.DAY_OF_MONTH, day)
@@ -174,13 +154,10 @@ class Add_Event_Activity : AppCompatActivity() {
             } else {
                 minute.toString()
             }
-
             newCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
             newCalendar.set(Calendar.MINUTE, minute)
 
             binding.tvTime.text = "$formatedHour : $formatedMin"
-
-
         })
 
         //funcion que se llama al pulsar el boton de añadir al calendario
@@ -211,17 +188,8 @@ class Add_Event_Activity : AppCompatActivity() {
         binding.tvActualDate.text = registerDateAndTime
     }
 
-    private fun createActionbar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Nuevo Evento"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
+    override fun onBackPressed() {
         finish()
-        return super.onSupportNavigateUp()
+        super.onBackPressed()
     }
 }

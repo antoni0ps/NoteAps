@@ -14,10 +14,10 @@
         <!--DATOS DE LA NOTA-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_margin="8dp"
             android:background="@drawable/custom_timepicker"
-            android:layout_gravity="center"
-            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -55,8 +55,7 @@
                 android:layout_marginTop="5dp"
                 android:text="nombre usuario"
                 android:textColor="@color/darker_grey"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textSize="17sp" />
 
 
             <!--ICONO - TXT - CORREO-->
@@ -92,10 +91,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/darker_grey"
                 android:text="email"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textColor="@color/darker_grey"
+                android:textSize="17sp" />
 
             <!--ICONO - TXT - TITULO-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -117,8 +115,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/darker_grey"
                     android:text="Título"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -133,7 +131,7 @@
                 android:text="Título"
                 android:textColor="@color/darker_grey"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                />
 
             <!--ICONO - TXT - DESCRIPCIÓN-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -172,7 +170,7 @@
                 android:text="descripción"
                 android:textColor="@color/darker_grey"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                />
 
             <!--ICONO - TXT - FECHA REGISTRO-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -187,7 +185,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_time"
-                    android:tint="@color/darker_grey"/>
+                    android:tint="@color/darker_grey" />
 
                 <!--TXT-->
                 <TextView
@@ -207,11 +205,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/darker_grey"
                 android:layout_marginTop="5dp"
                 android:text="fecha"
+                android:textColor="@color/darker_grey"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                />
 
             <!--ICONO - TXT - FECHA NOTA-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -233,8 +231,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:textColor="@color/darker_grey"
                     android:text="Fecha de finalización"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -246,10 +244,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/darker_grey"
                 android:text="fecha finalizacion"
+                android:textColor="@color/darker_grey"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                />
 
             <!--ICONO - TXT - ESTADO-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -270,9 +268,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/darker_grey"
                     android:layout_marginStart="10dp"
                     android:text="Estado"
+                    android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -281,13 +279,12 @@
             <TextView
                 android:id="@+id/status_detail"
                 android:layout_width="wrap_content"
-                android:textColor="@color/darker_grey"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="estado"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textColor="@color/darker_grey"
+                android:textSize="17sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

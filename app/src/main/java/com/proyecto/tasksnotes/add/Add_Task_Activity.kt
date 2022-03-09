@@ -42,11 +42,13 @@ class Add_Task_Activity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         newCalendar = Calendar.getInstance()
 
-
-//        createActionBar()
         getAndSetData()
         getDateAndTime()
         createDatePickerAndTimePicker()
+
+        binding.saveTaskButton.setOnClickListener {
+            getTaskData()
+        }
     }
 
     private fun createDatePickerAndTimePicker() {
@@ -62,11 +64,9 @@ class Add_Task_Activity : AppCompatActivity() {
         //Establecemos la fecha de inicio del calendario
         datePickerTimeline.setInitialDate(year, month, day)
 
-
         datePickerTimeline.setOnDateSelectedListener(object : OnDateSelectedListener {
             @SuppressLint("SetTextI18n")
             override fun onDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int) {
-
 
                 val formatedDay: String
                 val formatedMonth: String
@@ -89,14 +89,10 @@ class Add_Task_Activity : AppCompatActivity() {
 
                 binding.tvFinishDate.text = "$formatedDay/$formatedMonth/$year"
             }
-
             override fun onDisabledDateSelected(year: Int, month: Int, day: Int, dayOfWeek: Int, isDisabled: Boolean) {
             }
         })
-
     }
-
-
 
     private fun getTaskData() {
 
@@ -114,8 +110,8 @@ class Add_Task_Activity : AppCompatActivity() {
         if (userName.isEmpty() || email.isEmpty() || actualDate.isEmpty() || title.isEmpty() || description.isEmpty() || taskDate.isEmpty()) {
             Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
         } else {
-            addTaskToDatabase(userUid, taskId!!, userName, email, actualDate, title, description, taskDate, status)
             Toast.makeText(this, "Agregando tarea a la Base de Datos...", Toast.LENGTH_SHORT).show()
+            addTaskToDatabase(userUid, taskId!!, userName, email, actualDate, title, description, taskDate, status)
             onBackPressed()
         }
     }
@@ -131,14 +127,6 @@ class Add_Task_Activity : AppCompatActivity() {
             }
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Nueva Tarea"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
 
     private fun getAndSetData() {
 
@@ -164,29 +152,11 @@ class Add_Task_Activity : AppCompatActivity() {
         binding.tvActualDate.text = registerDateAndTime
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
-    }
 
     override fun onBackPressed() {
         finish()
         super.onBackPressed()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        menuInflater.inflate(R.menu.add_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-
-            R.id.addToDatabase -> getTaskData()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
 }

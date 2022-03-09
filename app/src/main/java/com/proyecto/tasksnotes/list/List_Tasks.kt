@@ -38,8 +38,7 @@ class List_Tasks : AppCompatActivity() {
     private lateinit var options: FirebaseRecyclerOptions<Task>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
-    private lateinit var dialog: Dialog
-    private lateinit var dialogBinding: OptionsDialogBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,29 +48,23 @@ class List_Tasks : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firebaseUser = auth.currentUser!!
-
         recyclerViewTasks = binding.recyclerViewTasks
         recyclerViewTasks.setHasFixedSize(true) //el recyclerview se adaptará al tamaño de la lista
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
 
-//        createActionBar()
         listTasks()
-        dialog = Dialog(this)
+
         binding.addTaskButton.setOnClickListener {
-            startActivity(Intent(this,Add_Task_Activity::class.java))
+            startActivity(Intent(this, Add_Task_Activity::class.java))
         }
-
-
     }
 
     private fun listTasks() {
 
-
         val query = dataBaseReference.child(firebaseUser.uid).child("tasks").orderByChild("status")
 
         options = FirebaseRecyclerOptions.Builder<Task>().setQuery(query, Task::class.java).build()
-
         adapter = object : FirebaseRecyclerAdapter<Task, ViewHolder_Task>(options) {
 
             @RequiresApi(Build.VERSION_CODES.M)
@@ -94,7 +87,6 @@ class List_Tasks : AppCompatActivity() {
                     override fun onItemClick(view: View?, position: Int) {
 
                         //Obtener datos de la tarea
-
                         val userName = getItem(position).userName
                         val email = getItem(position).email
                         val registerDate = getItem(position).registerDate
@@ -104,7 +96,6 @@ class List_Tasks : AppCompatActivity() {
                         val status = getItem(position).status
 
                         //Enviar datos de la tarea a la actividad de detalle
-
                         val intent = Intent(applicationContext, Detail_Task_Activity::class.java)
                         intent.putExtra("userName_detail", userName)
                         intent.putExtra("email_detail", email)
@@ -114,9 +105,7 @@ class List_Tasks : AppCompatActivity() {
                         intent.putExtra("finishDate_detail", taskDate)
                         intent.putExtra("status_detail", status)
                         startActivity(intent)
-
                     }
-
                 })
 
                 val menuIcon = viewHolder_task.mView.findViewById<ImageView>(R.id.item_menuButton)
@@ -136,11 +125,9 @@ class List_Tasks : AppCompatActivity() {
                     popupMenu.menu.add("Eliminar tarea").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
 
                         deleteTask(taskId!!)
-
                         false
                     })
                     popupMenu.show()
-
                 }
             }
 
@@ -158,9 +145,7 @@ class List_Tasks : AppCompatActivity() {
 
         recyclerViewTasks.layoutManager = linearLayoutManager
         recyclerViewTasks.adapter = adapter
-
     }
-
 
     private fun deleteTask(taskId: String) {
         val builder = AlertDialog.Builder(this)
@@ -177,8 +162,10 @@ class List_Tasks : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (ds in snapshot.children) {
                         ds.ref.removeValue()
+                            .addOnCompleteListener {
+                                Toast.makeText(applicationContext, "Tarea eliminada", Toast.LENGTH_SHORT).show()
+                            }
                     }
-                    Toast.makeText(applicationContext, "Tarea eliminada", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -208,7 +195,6 @@ class List_Tasks : AppCompatActivity() {
         //Metodo que se ejecutará si el usuario confirma que quiere actualizar el estado de la nota
         builder.setPositiveButton("SI") { dialogInterface, i ->
 
-
             val query = dataBaseReference.child(firebaseUser.uid).child("tasks").orderByChild("taskId").equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -219,11 +205,16 @@ class List_Tasks : AppCompatActivity() {
                         var status = ds.child("status").getValue(String::class.java)
 
                         if (status.equals("No finalizada")) {
-                            ds.ref.child("status").setValue("Finalizada").toString()
-                            Toast.makeText(applicationContext, "Tarea finalizada", Toast.LENGTH_SHORT).show()
+                            ds.ref.child("status").setValue("Finalizada")
+                                .addOnSuccessListener {
+                                    Toast.makeText(applicationContext, "Tarea finalizada", Toast.LENGTH_SHORT).show()
+                                }
                         } else {
                             ds.ref.child("status").setValue("No finalizada")
-                            Toast.makeText(applicationContext, "Tarea no finalizada", Toast.LENGTH_SHORT).show()
+                                .addOnSuccessListener {
+                                    Toast.makeText(applicationContext, "Tarea no finalizada", Toast.LENGTH_SHORT).show()
+                                }
+
                         }
                     }
                 }
@@ -242,20 +233,10 @@ class List_Tasks : AppCompatActivity() {
     override fun onStart() {
         adapter.startListening()
         super.onStart()
-
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Mis Tareas"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 }

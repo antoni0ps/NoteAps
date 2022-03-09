@@ -42,21 +42,12 @@ class List_Events : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firebaseUser = auth.currentUser!!
-
         recyclerViewEvents = binding.recyclerViewEvents
         recyclerViewEvents.setHasFixedSize(true)
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
 
-
-
-
-
-
-
-//        createActionBar()
         listEvents()
-
 
         binding.addEventButton.setOnClickListener {
             startActivity(Intent(this, Add_Event_Activity::class.java))
@@ -68,7 +59,6 @@ class List_Events : AppCompatActivity() {
         val query = dataBaseReference.child(firebaseUser.uid).child("events").orderByChild("event_date")
 
         options = FirebaseRecyclerOptions.Builder<Event>().setQuery(query, Event::class.java).build()
-
         adapter = object : FirebaseRecyclerAdapter<Event, ViewHolder_Event>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Event {
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
@@ -94,7 +84,6 @@ class List_Events : AppCompatActivity() {
                     override fun onItemClick(view: View?, position: Int) {
 
                         //obtener datos del evento
-
                         val userName = getItem(position).userName
                         val email = getItem(position).email
                         val title = getItem(position).title
@@ -112,7 +101,6 @@ class List_Events : AppCompatActivity() {
                         intent.putExtra("time_detail", eventTime)
                         startActivity(intent)
                     }
-
                 })
 
                 val menuIcon = eventViewHolder.mView.findViewById<ImageView>(R.id.event_menuButton)
@@ -123,14 +111,12 @@ class List_Events : AppCompatActivity() {
                     popupMenu.menu.add("Eliminar Evento").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
 
                         deleteEvent(eventId!!)
-
                         false
                     })
 
                     popupMenu.show()
                 }
             }
-
         }
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         linearLayoutManager.reverseLayout = true
@@ -154,17 +140,21 @@ class List_Events : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (ds in snapshot.children) {
                         ds.ref.removeValue()
+                            .addOnCompleteListener {
+                                Toast.makeText(applicationContext, "Evento eliminado correctamente", Toast.LENGTH_SHORT).show()
+                            }
                     }
-                    Toast.makeText(applicationContext, "Evento eliminado correctamente", Toast.LENGTH_SHORT).show()
+
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     Toast.makeText(applicationContext, "Error al eliminar el evento", Toast.LENGTH_SHORT).show()
                 }
             })
         }
-        builder.setNegativeButton("NO"){dialogInterface,i->
+        builder.setNegativeButton("NO") { dialogInterface, i ->
 
-            Toast.makeText(applicationContext,"El evento no ha sido eliminado",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "El evento no ha sido eliminado", Toast.LENGTH_SHORT).show()
         }
         builder.create().show()
     }
@@ -175,17 +165,8 @@ class List_Events : AppCompatActivity() {
 
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Mis Citas y Eventos"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 }

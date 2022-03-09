@@ -14,7 +14,6 @@ class Detail_Task_Activity : AppCompatActivity() {
         binding = ActivityTaskDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        createActionBar()
         getAndSetData()
     }
 
@@ -37,17 +36,8 @@ class Detail_Task_Activity : AppCompatActivity() {
         binding.statusDetail.text = status
     }
 
-    private fun createActionBar() {
-        val actionBar = supportActionBar
-        with(actionBar) {
-            this!!.title = "Detalles de la tarea"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 }

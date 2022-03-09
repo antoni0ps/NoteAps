@@ -58,12 +58,27 @@ class About_Activity : AppCompatActivity() {
             .addItem(createSchool())
             .addEmail("anpisan@gmail.com")
             .addItem(addLinkedIn())
+            .addItem(addGithub())
             .addTwitter("antoni0ps")
             .addInstagram("antoni0ps/")
             .addItem(copyRight)
             .create()
         setContentView(aboutPage)
 
+    }
+
+    private fun addGithub(): Element? {
+        val github = Element()
+        github.setTitle("GitHub")
+        github.iconDrawable = R.drawable.github_icon
+
+        val url = "https://github.com/antoni0ps"
+        github.setOnClickListener {
+            val uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW,uri)
+            startActivity(intent)
+        }
+        return github
     }
 
     private fun createSchool(): Element? {
