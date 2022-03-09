@@ -19,6 +19,7 @@ class Add_Note_Activity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var db: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    private lateinit var emailPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class Add_Note_Activity : AppCompatActivity() {
 
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
         binding.noteSaveButton.setOnClickListener {
             getAndValidateData()
@@ -38,9 +40,10 @@ class Add_Note_Activity : AppCompatActivity() {
 
     private fun addNoteToDatabase(userUid: String, noteId: String, email: String, title: String, content: String, colorCode: Int) {
 
-        val tableName = "notes"
+
         val note = Note(userUid, noteId, email, title, content, colorCode)
-        db.child(tableName).child(noteId).setValue(note)
+
+        db.child("users").child(emailPath).child("user_notes").child(noteId).setValue(note)
             .addOnCompleteListener {
                 Toast.makeText(this, "Nota agregada con éxito.", Toast.LENGTH_SHORT).show()
 

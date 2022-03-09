@@ -38,6 +38,7 @@ class List_Tasks : AppCompatActivity() {
     private lateinit var options: FirebaseRecyclerOptions<Task>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
+    private lateinit var emailPath: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +53,7 @@ class List_Tasks : AppCompatActivity() {
         recyclerViewTasks.setHasFixedSize(true) //el recyclerview se adaptará al tamaño de la lista
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
         listTasks()
 
@@ -62,7 +64,7 @@ class List_Tasks : AppCompatActivity() {
 
     private fun listTasks() {
 
-        val query = dataBaseReference.child(firebaseUser.uid).child("tasks").orderByChild("status")
+        val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("status")
 
         options = FirebaseRecyclerOptions.Builder<Task>().setQuery(query, Task::class.java).build()
         adapter = object : FirebaseRecyclerAdapter<Task, ViewHolder_Task>(options) {
@@ -156,7 +158,7 @@ class List_Tasks : AppCompatActivity() {
         builder.setPositiveButton("SI") { dialogInterface, i ->
 
             //Eliminamos nota de la Base de datos
-            val query = dataBaseReference.child(firebaseUser.uid).child("tasks").orderByChild("taskId").equalTo(taskId)
+            val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId").equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -195,14 +197,14 @@ class List_Tasks : AppCompatActivity() {
         //Metodo que se ejecutará si el usuario confirma que quiere actualizar el estado de la nota
         builder.setPositiveButton("SI") { dialogInterface, i ->
 
-            val query = dataBaseReference.child(firebaseUser.uid).child("tasks").orderByChild("taskId").equalTo(taskId)
+            val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId").equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     for (ds in snapshot.children) {
 
-                        var status = ds.child("status").getValue(String::class.java)
+                        val status = ds.child("status").getValue(String::class.java)
 
                         if (status.equals("No finalizada")) {
                             ds.ref.child("status").setValue("Finalizada")

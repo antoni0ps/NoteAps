@@ -14,7 +14,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import com.proyecto.tasksnotes.R
-import java.lang.String
 
 
 class About_Activity : AppCompatActivity() {
@@ -28,14 +27,14 @@ class About_Activity : AppCompatActivity() {
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val versionElement : Element = Element()
-        versionElement.setTitle("Version 1.0");
+        val versionElement = Element()
+        versionElement.title = "Version 1.0"
         versionElement.gravity = Gravity.CENTER
 
-        val center  :Element = Element()
-        center.setTitle("ILERNA ONLINE")
+        val center = Element()
+        center.title = "ILERNA ONLINE"
 
-        val copyRight : Element = Element()
+        val copyRight = Element()
         @SuppressLint("DefaultLocale")
         val string = String.format("Copyright %d by Antonio Piñero", Calendar.getInstance()[Calendar.YEAR])
         copyRight.title = string
@@ -43,7 +42,7 @@ class About_Activity : AppCompatActivity() {
 
 
         val name = Element()
-        name.setTitle("Antonio Piñero Sánchez")
+        name.title = "Antonio Piñero Sánchez"
         name.gravity = Gravity.CENTER
 
 
@@ -67,9 +66,9 @@ class About_Activity : AppCompatActivity() {
 
     }
 
-    private fun addGithub(): Element? {
+    private fun addGithub(): Element {
         val github = Element()
-        github.setTitle("GitHub")
+        github.title = "GitHub"
         github.iconDrawable = R.drawable.github_icon
 
         val url = "https://github.com/antoni0ps"
@@ -81,9 +80,9 @@ class About_Activity : AppCompatActivity() {
         return github
     }
 
-    private fun createSchool(): Element? {
+    private fun createSchool(): Element {
         val school = Element()
-        school.setTitle("ILERNA Online")
+        school.title = "ILERNA Online"
         school.iconDrawable = R.drawable.ilerna_icon
 
         val url = "https://www.ilerna.es/"
@@ -96,10 +95,10 @@ class About_Activity : AppCompatActivity() {
         return school
     }
 
-    private fun addLinkedIn() : Element?{
+    private fun addLinkedIn() : Element{
 
         val linkediIn = Element()
-        linkediIn.setTitle("LinkedIn")
+        linkediIn.title = "LinkedIn"
         linkediIn.iconDrawable = R.drawable.linkedin_icon
 
         val url = "https://www.linkedin.com/in/antoniopinerosanchez/"

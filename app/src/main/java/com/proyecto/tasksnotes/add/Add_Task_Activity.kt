@@ -29,6 +29,7 @@ class Add_Task_Activity : AppCompatActivity() {
     private lateinit var db: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var newCalendar: Calendar
+    private lateinit var emailPath : String
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -41,10 +42,12 @@ class Add_Task_Activity : AppCompatActivity() {
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
         newCalendar = Calendar.getInstance()
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
         getAndSetData()
         getDateAndTime()
         createDatePickerAndTimePicker()
+
 
         binding.saveTaskButton.setOnClickListener {
             getTaskData()
@@ -121,7 +124,7 @@ class Add_Task_Activity : AppCompatActivity() {
         title: String, description: String, taskDate: String, status: String
     ) {
         val task = Task(userUid, taskId, userName, email, actualDate, title, description, taskDate, status)
-        db.child("users").child(auth.currentUser!!.uid).child("tasks").child(taskId).setValue(task)
+        db.child("users").child(emailPath).child("user_tasks").child(taskId).setValue(task)
             .addOnSuccessListener {
                 Toast.makeText(this,"Tarea agregada con éxito",Toast.LENGTH_SHORT).show()
             }
@@ -133,9 +136,9 @@ class Add_Task_Activity : AppCompatActivity() {
         var name = ""
         var surname = ""
 
-        db.child("users").child(auth.currentUser!!.uid).child("name").get().addOnSuccessListener {
+        db.child("users").child(emailPath).child("name").get().addOnSuccessListener {
             name = it.value.toString()
-            db.child("users").child(auth.currentUser!!.uid).child("surname").get().addOnSuccessListener {
+            db.child("users").child(emailPath).child("surname").get().addOnSuccessListener {
                 surname = it.value.toString()
                 binding.tvUserName.text = "$name $surname"
             }

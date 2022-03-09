@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.proyecto.tasksnotes.R
@@ -18,6 +19,8 @@ class Detail_Note_Activity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailNoteBinding
     private lateinit var db: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var emailPath: String
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +30,8 @@ class Detail_Note_Activity : AppCompatActivity() {
         setContentView(binding.root)
 
         db = FirebaseDatabase.getInstance().reference
+        auth = FirebaseAuth.getInstance()
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
         getAndSetData()
         binding.noteSaveButton.setOnClickListener {
@@ -47,10 +52,10 @@ class Detail_Note_Activity : AppCompatActivity() {
 
     private fun updateDatainDatabase() {
 
-        val tableName = "notes"
         val noteId = intent.getStringExtra("noteId")
-        db.child(tableName).child(noteId!!).child("title").setValue(binding.tvTitle.text.toString())
-        db.child(tableName).child(noteId).child("content").setValue(binding.tvContent.text.toString())
+
+        db.child("users").child(emailPath).child("user_notes").child(noteId!!).child("title").setValue(binding.tvTitle.text.toString())
+        db.child("users").child(emailPath).child("user_notes").child(noteId).child("content").setValue(binding.tvContent.text.toString())
             .addOnCompleteListener {
                 Toast.makeText(this, "Nota Actualizada con éxito.", Toast.LENGTH_SHORT).show()
                 onBackPressed()

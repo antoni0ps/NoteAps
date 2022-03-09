@@ -4,9 +4,9 @@ data class User(
     var uid : String?,
     var name: String?,
     var surname: String?,
-    var email: String?,
-    var password: String?
+    var email: String?
+
 ) {
-    constructor() : this("", "", "", "","")
+    constructor() : this("", "", "", "")
 }
 

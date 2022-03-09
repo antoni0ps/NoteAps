@@ -22,6 +22,7 @@ class Add_Event_Activity : AppCompatActivity() {
     private lateinit var db: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var newCalendar: Calendar
+    private lateinit var emailPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,8 @@ class Add_Event_Activity : AppCompatActivity() {
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
         newCalendar = Calendar.getInstance()
+        emailPath = auth.currentUser?.email!!.replace(".",",")
+
 
         getAndSetData()
         getDateAndTime()
@@ -44,7 +47,8 @@ class Add_Event_Activity : AppCompatActivity() {
         title: String, description: String, eventDate: String, eventHour: String
     ) {
         val event = Event(userUid, eventId, userName, email, title, description, eventDate, eventHour)
-        db.child("users").child(auth.currentUser!!.uid).child("events").child(eventId).setValue(event)
+
+        db.child("users").child(emailPath).child("user_events").child(eventId).setValue(event)
             .addOnSuccessListener {
                 Toast.makeText(this, "Evento agregado con éxito", Toast.LENGTH_SHORT).show()
             }
@@ -157,7 +161,7 @@ class Add_Event_Activity : AppCompatActivity() {
             newCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
             newCalendar.set(Calendar.MINUTE, minute)
 
-            binding.tvTime.text = "$formatedHour : $formatedMin"
+            binding.tvTime.text = "$formatedHour:$formatedMin"
         })
 
         //funcion que se llama al pulsar el boton de añadir al calendario
@@ -169,9 +173,9 @@ class Add_Event_Activity : AppCompatActivity() {
         var name = ""
         var surname = ""
 
-        db.child("users").child(auth.currentUser!!.uid).child("name").get().addOnSuccessListener {
+        db.child("users").child(emailPath).child("name").get().addOnSuccessListener {
             name = it.value.toString()
-            db.child("users").child(auth.currentUser!!.uid).child("surname").get().addOnSuccessListener {
+            db.child("users").child(emailPath).child("surname").get().addOnSuccessListener {
                 surname = it.value.toString()
                 binding.tvUserName.text = "$name $surname"
             }

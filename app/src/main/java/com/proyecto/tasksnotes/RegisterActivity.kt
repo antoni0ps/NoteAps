@@ -21,6 +21,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var emailPath: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +33,8 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseDatabase.getInstance()
-
         databaseReference = db.getReference("users")
+        emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         binding.registerButton.setOnClickListener {
             validateData()
@@ -95,21 +96,22 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     addUser()
                 } else if (email == queryEmail) {
-                    Toast.makeText(this, "Este email ya está registrado, por favor pruebe con otro diferente.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Este email ya está registrado, por favor pruebe con otro diferente.",
+                        Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(
                         this, "Error de autenticación",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                        Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun addUser() {
         val uid = auth.uid
-        val user = User(uid, name, surname, email, password)
+        val user = User(uid, name, surname, email)
+
         val databaseReference = FirebaseDatabase.getInstance().getReference("users")
-        databaseReference.child(uid!!).setValue(user)
+        databaseReference.child(emailPath).setValue(user)
             .addOnSuccessListener {
                 Toast.makeText(this, "Cuenta creada con éxito", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MenuActivity::class.java))

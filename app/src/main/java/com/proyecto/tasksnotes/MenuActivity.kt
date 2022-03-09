@@ -21,6 +21,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var usuarios: DatabaseReference
     private lateinit var user: FirebaseUser
+    private lateinit var emailPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,7 @@ class MenuActivity : AppCompatActivity() {
 
         usuarios = FirebaseDatabase.getInstance().getReference("users")
         auth = FirebaseAuth.getInstance()
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
 
 
@@ -66,7 +68,7 @@ class MenuActivity : AppCompatActivity() {
 
         user = auth.currentUser!!
 
-        usuarios.child(user.uid).addValueEventListener(object : ValueEventListener {
+        usuarios.child(emailPath).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 if (snapshot.exists()) {

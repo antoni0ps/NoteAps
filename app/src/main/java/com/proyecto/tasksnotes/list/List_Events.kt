@@ -33,6 +33,7 @@ class List_Events : AppCompatActivity() {
     private lateinit var options: FirebaseRecyclerOptions<Event>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
+    private lateinit var emailPath : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,7 @@ class List_Events : AppCompatActivity() {
         recyclerViewEvents.setHasFixedSize(true)
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
         listEvents()
 
@@ -56,14 +58,13 @@ class List_Events : AppCompatActivity() {
 
     private fun listEvents() {
 
-        val query = dataBaseReference.child(firebaseUser.uid).child("events").orderByChild("event_date")
+        val query = dataBaseReference.child(emailPath).child("user_events").orderByChild("event_date")
 
         options = FirebaseRecyclerOptions.Builder<Event>().setQuery(query, Event::class.java).build()
         adapter = object : FirebaseRecyclerAdapter<Event, ViewHolder_Event>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Event {
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
-                val eventViewHolder = ViewHolder_Event(view)
-                return eventViewHolder
+                return ViewHolder_Event(view)
             }
 
             override fun onBindViewHolder(eventViewHolder: ViewHolder_Event, position: Int, event: Event) {
@@ -108,7 +109,7 @@ class List_Events : AppCompatActivity() {
 
                     val eventId = getItem(position).eventId
                     val popupMenu = PopupMenu(applicationContext, menuIcon)
-                    popupMenu.menu.add("Eliminar Evento").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
+                    popupMenu.menu.add("Eliminar Evento").setOnMenuItemClickListener({
 
                         deleteEvent(eventId!!)
                         false

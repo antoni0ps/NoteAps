@@ -37,6 +37,7 @@ class List_Notes : AppCompatActivity() {
     private lateinit var db: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     private lateinit var layoutMan: StaggeredGridLayoutManager
+    private lateinit var emailPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,8 @@ class List_Notes : AppCompatActivity() {
         recyclerViewNotes = binding.recyclerViewNotes
         recyclerViewNotes.setHasFixedSize(true)
         db = FirebaseDatabase.getInstance()
-        databaseReference = db.getReference("notes")
+        databaseReference = db.getReference("users")
+        emailPath = auth.currentUser?.email!!.replace(".",",")
 
         binding.addNoteButton.setOnClickListener {
             val intent = Intent(this, Add_Note_Activity::class.java)
@@ -62,7 +64,7 @@ class List_Notes : AppCompatActivity() {
 
     private fun listNotes() {
 
-        val query = databaseReference.orderByChild("userUid").equalTo(firebaseUser.uid)
+        val query = databaseReference.child(emailPath).child("user_notes")
 
         options = FirebaseRecyclerOptions.Builder<Note>().setQuery(query, Note::class.java).build()
         adapter = object : FirebaseRecyclerAdapter<Note, ViewHolder_Note>(options) {
