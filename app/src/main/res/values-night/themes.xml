@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">#FF8862</item>
         <item name="colorPrimaryVariant">#E6621B</item>
+        <item name="fontFamily">@font/monserrat_regular</item>
         <item name="colorOnPrimary">#2C2C2C</item>
         <!-- Secondary brand color. -->
         <item name="colorAccent">#E6621B</item>

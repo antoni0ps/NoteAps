@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,8 +16,8 @@
             android:id="@+id/img_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="16dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,8 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="32dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/registerLayout"
             app:layout_constraintTop_toBottomOf="@+id/img_layout">
 
@@ -55,6 +55,7 @@
                     android:id="@+id/editTextName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/monserrat_regular"
                     android:inputType="textPersonName|textCapWords"
                     android:maxLength="20" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -74,6 +75,7 @@
                     android:id="@+id/editTextSurname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/monserrat_regular"
                     android:inputType="textPersonName|textCapWords"
                     android:maxLength="30" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +95,7 @@
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/monserrat_regular"
                     android:inputType="textEmailAddress"
                     android:maxLength="150" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -104,18 +107,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                app:passwordToggleEnabled="true"
                 android:hint="Contraseña (Min. 6 caracteres)"
                 app:layout_constraintTop_toBottomOf="@id/email"
+                app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/ic_password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nextFocusForward="@id/editTextConfirmPassword"
+                    android:fontFamily="@font/monserrat_regular"
                     android:inputType="textPassword"
-                    android:maxLength="20" />
+                    android:maxLength="20"
+                    android:nextFocusForward="@id/editTextConfirmPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -125,15 +129,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                app:passwordToggleEnabled="true"
                 android:hint="Confirma tu contraseña"
                 app:layout_constraintTop_toBottomOf="@id/email"
+                app:passwordToggleEnabled="true"
                 app:startIconDrawable="@drawable/ic_password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/monserrat_regular"
                     android:inputType="textPassword"
                     android:maxLength="20" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -152,15 +157,16 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="64dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/gradient_background_border"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="Registro"
                 android:textColor="@color/darker_grey"
-                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password" />
 

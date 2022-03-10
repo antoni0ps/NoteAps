@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,6 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Nombre usuario"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="nombre usuario"
                 android:textColor="@color/darker_grey"
                 android:textSize="17sp" />
@@ -78,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Email usuario"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -91,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="email"
                 android:textColor="@color/darker_grey"
                 android:textSize="17sp" />
@@ -115,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Título"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -128,10 +132,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="Título"
                 android:textColor="@color/darker_grey"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <!--ICONO - TXT - DESCRIPCIÓN-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -153,6 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Descripción"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -167,10 +172,10 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="descripción"
                 android:textColor="@color/darker_grey"
-                android:textSize="17sp"
-                />
+                android:textSize="17sp" />
 
             <!--ICONO - TXT - FECHA REGISTRO-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -193,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Fecha de Registro"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -206,10 +212,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="fecha"
                 android:textColor="@color/darker_grey"
-                android:textSize="17sp"
-                />
+                android:textSize="17sp" />
 
             <!--ICONO - TXT - FECHA NOTA-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -231,6 +237,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Fecha de finalización"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -244,10 +251,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="fecha finalizacion"
                 android:textColor="@color/darker_grey"
-                android:textSize="17sp"
-                />
+                android:textSize="17sp" />
 
             <!--ICONO - TXT - ESTADO-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -269,6 +276,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:fontFamily="@font/monserrat_regular"
                     android:text="Estado"
                     android:textColor="@color/darker_grey"
                     android:textSize="20sp" />
@@ -282,6 +290,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/monserrat_regular"
                 android:text="estado"
                 android:textColor="@color/darker_grey"
                 android:textSize="17sp" />

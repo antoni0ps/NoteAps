@@ -1,14 +1,15 @@
 package com.proyecto.tasksnotes
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.proyecto.tasksnotes.databinding.ActivityMainBinding
+import com.proyecto.tasksnotes.recovery.AccountRecoveryActivity
+import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +29,10 @@ class MainActivity : AppCompatActivity() {
 
             when {
                 email.isEmpty() || password.isEmpty() -> {
-                    Toast.makeText(this, "Aún faltan campos por rellenar",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Aún faltan campos por rellenar",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     SignIn(email, password)
@@ -40,19 +43,49 @@ class MainActivity : AppCompatActivity() {
         binding.buttonRegister.setOnClickListener {
             goToRegister()
         }
+
+        binding.tvRecoveryAccount.setOnClickListener {
+            startActivity(Intent(this, AccountRecoveryActivity::class.java))
+        }
     }
 
     private fun SignIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    goToMenu()
-                    finish()
+                    checkVerification()
                 } else {
-                    Toast.makeText(this, "Correo o contraseña icorrectos.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Correo o contraseña icorrectos.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+    }
+
+    private fun checkVerification() {
+        val firebaseUser = auth.currentUser
+
+        if (firebaseUser!!.isEmailVerified) {
+            goToMenu()
+            finish()
+        } else {
+            sendEmailVerification()
+            startActivity(Intent(this, EmailVerificationActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun sendEmailVerification() {
+        val user = auth.currentUser
+        user!!.sendEmailVerification().addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(
+                    this, "Se envio un correo de verificación",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun goToMenu() {
@@ -64,6 +97,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
-
 
 }

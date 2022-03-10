@@ -4,75 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detail.Detail_Note_Activity"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".detail.Detail_Note_Activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="end">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/noteSaveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Actualizar"
-            android:fontFamily="@font/roboto"
-            android:gravity="end"
-            android:background="@drawable/gradient_background_border"
-            android:textColor="@color/darker_grey"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="16dp"
-            android:elevation="8dp"
-            android:translationZ="2dp"
-            app:layout_constraintBottom_toTopOf="@id/linearLayoutTD"/>
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutTD"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutButton"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tvTitle"
+        <LinearLayout
+            android:id="@+id/linearLayoutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:hint="Título"
-            android:textColor="@color/dark_grey"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:gravity="end"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tvContent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/noteSaveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/gradient_background_border"
+                android:elevation="8dp"
+                android:fontFamily="@font/monserrat_regular"
+                android:gravity="end"
+                android:text="Actualizar"
+                android:textColor="@color/darker_grey"
+                android:textStyle="bold"
+                android:translationZ="2dp"
+                app:layout_constraintBottom_toTopOf="@id/linearLayoutTD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutTD"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="start"
-            android:paddingStart="8dp"
-            android:hint="Descripción"
-            android:textColor="@color/dark_grey"
-            android:textStyle="italic"
-            android:textSize="20sp" />
+            android:layout_marginTop="56dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutButton">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/monserrat_regular"
+                android:hint="Título"
+                android:padding="8dp"
+                android:textColor="@color/dark_grey"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/monserrat_regular"
+                android:gravity="start"
+                android:hint="Descripción"
+                android:paddingStart="8dp"
+                android:textColor="@color/dark_grey"
+                android:textSize="20sp" />
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </ScrollView>

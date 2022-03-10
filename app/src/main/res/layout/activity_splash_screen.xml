@@ -14,10 +14,11 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/nameLayout">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"
+            android:layout_marginTop="32dp"
             android:layout_height="300dp"
             app:lottie_autoPlay="true"
             app:lottie_fileName="startAnimation.json"
@@ -26,22 +27,24 @@
 
         </com.airbnb.lottie.LottieAnimationView>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/nameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/animationLayout">
-
-        <ImageView
-            android:layout_width="250dp"
+        <LinearLayout
+            android:id="@+id/nameLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/nombreapp" />
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/animationLayout">
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/nombreapp" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

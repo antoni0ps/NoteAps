@@ -11,6 +11,13 @@
         android:roundIcon="@mipmap/ic_notes_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TasksNotes">
+
+        <activity
+            android:name=".recovery.EmailVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".recovery.AccountRecoveryActivity"
+            android:exported="false" />
         <activity
             android:name=".list.List_Events"
             android:exported="false" />

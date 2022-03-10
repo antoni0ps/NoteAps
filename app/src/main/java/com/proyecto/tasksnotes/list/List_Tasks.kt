@@ -1,16 +1,15 @@
 package com.proyecto.tasksnotes.list
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -18,13 +17,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.proyecto.tasksnotes.detail.Detail_Task_Activity
-import com.proyecto.tasksnotes.model.Task
 import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.add.Add_Task_Activity
-import com.proyecto.tasksnotes.viewholder.ViewHolder_Task
 import com.proyecto.tasksnotes.databinding.ActivityListTasksBinding
-import com.proyecto.tasksnotes.databinding.OptionsDialogBinding
+import com.proyecto.tasksnotes.detail.Detail_Task_Activity
+import com.proyecto.tasksnotes.model.Task
+import com.proyecto.tasksnotes.viewholder.ViewHolder_Task
 
 
 class List_Tasks : AppCompatActivity() {
@@ -53,7 +51,7 @@ class List_Tasks : AppCompatActivity() {
         recyclerViewTasks.setHasFixedSize(true) //el recyclerview se adaptará al tamaño de la lista
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
-        emailPath = auth.currentUser?.email!!.replace(".",",")
+        emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         listTasks()
 

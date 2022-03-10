@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary">#FD7A50</color>
-    <color name="primary_dark">#E8631B</color>
+    <color name="primary_dark">#DC6A2C</color>
     <color name="dark_grey">#5F5F5F</color>
     <color name="background_clear">#ffa06d</color>
     <color name="darker_grey">#323232</color>
@@ -24,5 +24,7 @@
     <color name="red">#F8BBD0</color>
     <color name="blue">#80CBC4</color>
     <color name="lightPurple">#B2B9E1</color>
+    <color name="blue_linkedin">#0E76A8</color>
+    <color name="black_github">#1D1A1A</color>
 
 </resources>

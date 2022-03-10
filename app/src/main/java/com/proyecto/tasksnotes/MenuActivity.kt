@@ -14,6 +14,7 @@ import com.proyecto.tasksnotes.list.List_Tasks
 import com.proyecto.tasksnotes.about.About_Activity
 import com.proyecto.tasksnotes.databinding.ActivityMenuBinding
 import com.proyecto.tasksnotes.list.List_Events
+import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
 
 class MenuActivity : AppCompatActivity() {
 
@@ -21,7 +22,6 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var usuarios: DatabaseReference
     private lateinit var user: FirebaseUser
-    private lateinit var emailPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +31,6 @@ class MenuActivity : AppCompatActivity() {
 
         usuarios = FirebaseDatabase.getInstance().getReference("users")
         auth = FirebaseAuth.getInstance()
-        emailPath = auth.currentUser?.email!!.replace(".",",")
-
 
 
         /* Llamamos a la funcion loadData al iniciar para comprobar si existe un usuario logueado,
@@ -50,7 +48,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
         binding.myEventsButton.setOnClickListener {
-            startActivity(Intent(this,List_Events::class.java))
+            startActivity(Intent(this, List_Events::class.java))
         }
 
         binding.aboutButton.setOnClickListener {
@@ -67,34 +65,34 @@ class MenuActivity : AppCompatActivity() {
     private fun loadData() {
 
         user = auth.currentUser!!
+        if (user != null) {
+            val emailPath = auth.currentUser?.email!!.replace(".", ",")
+            usuarios.child(emailPath).addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
 
-        usuarios.child(emailPath).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
 
-                if (snapshot.exists()) {
+                        val name = "" + snapshot.child("name").value
+                        val surname = " " + snapshot.child("surname").value
+                        val email = "" + snapshot.child("email").value
 
-                    val name = "" + snapshot.child("name").value
-                    val surname = " " + snapshot.child("surname").value
-                    val email = "" + snapshot.child("email").value
+                        // En caso de que exista un usuario logueado seteamos el texto con su nombre y su email
+                        binding.tvName.text = "$name $surname"
+                        binding.tvEmail.text = email
 
-                    // En caso de que exista un usuario logueado seteamos el texto con su nombre y su email
-                    binding.tvName.text = "$name $surname"
-                    binding.tvEmail.text = email
-
-                    //Si existe usuario logueado habilitamos los botones del menu
-                    binding.myEventsButton.isEnabled = true
-                    binding.myNotesButton.isEnabled = true
-                    binding.myTasksButton.isEnabled = true
-                    binding.aboutButton.isEnabled = true
-                    binding.logoutButton.isEnabled = true
+                        //Si existe usuario logueado habilitamos los botones del menu
+                        binding.myEventsButton.isEnabled = true
+                        binding.myNotesButton.isEnabled = true
+                        binding.myTasksButton.isEnabled = true
+                        binding.aboutButton.isEnabled = true
+                        binding.logoutButton.isEnabled = true
+                    }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {}
-        })
+                override fun onCancelled(error: DatabaseError) {}
+            })
+        }
     }
-
-
 
     private fun logOutApp() {
         auth.signOut()

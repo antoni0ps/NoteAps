@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.model.User
 import com.proyecto.tasksnotes.databinding.ActivityRegisterBinding
+import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -21,7 +22,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var emailPath: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseDatabase.getInstance()
         databaseReference = db.getReference("users")
-        emailPath = auth.currentUser?.email!!.replace(".", ",")
+
 
         binding.registerButton.setOnClickListener {
             validateData()
@@ -48,6 +48,8 @@ class RegisterActivity : AppCompatActivity() {
         email = binding.editTextEmail.text.toString().trim()
         password = binding.editTextPassword.text.toString().trim()
         val confirmPassword = binding.editTextConfirmPassword.text.toString().trim()
+
+
 
         val passwordRegex = Pattern.compile(
             "^" + ".{6,}" + "$"
@@ -94,7 +96,8 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    addUser()
+                    sendEmailVerification()
+                    sendData()
                 } else if (email == queryEmail) {
                     Toast.makeText(this, "Este email ya está registrado, por favor pruebe con otro diferente.",
                         Toast.LENGTH_LONG).show()
@@ -106,10 +109,20 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    private fun sendEmailVerification() {
+        val user = auth.currentUser
+        user!!.sendEmailVerification().addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Se envio un correo de verificación",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun addUser() {
         val uid = auth.uid
         val user = User(uid, name, surname, email)
-
+        val emailPath = auth.currentUser?.email!!.replace(".", ",")
         val databaseReference = FirebaseDatabase.getInstance().getReference("users")
         databaseReference.child(emailPath).setValue(user)
             .addOnSuccessListener {
@@ -120,6 +133,16 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "" + e.message, Toast.LENGTH_SHORT).show()
             }
 
+    }
+
+    private fun sendData(){
+        val intent = Intent(this, EmailVerificationActivity::class.java)
+        name = binding.editTextName.text.toString().trim()
+        surname = binding.editTextSurname.text.toString().trim()
+        intent.putExtra("name", name)
+        intent.putExtra("surname", surname)
+        startActivity(intent)
+        finish()
     }
 
     override fun onBackPressed() {

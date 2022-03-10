@@ -70,6 +70,7 @@ class About_Activity : AppCompatActivity() {
         val github = Element()
         github.title = "GitHub"
         github.iconDrawable = R.drawable.github_icon
+        github.iconTint = R.color.black_github
 
         val url = "https://github.com/antoni0ps"
         github.setOnClickListener {
@@ -84,6 +85,7 @@ class About_Activity : AppCompatActivity() {
         val school = Element()
         school.title = "ILERNA Online"
         school.iconDrawable = R.drawable.ilerna_icon
+        school.iconTint = R.color.black
 
         val url = "https://www.ilerna.es/"
         school.onClickListener = View.OnClickListener {
@@ -100,6 +102,7 @@ class About_Activity : AppCompatActivity() {
         val linkediIn = Element()
         linkediIn.title = "LinkedIn"
         linkediIn.iconDrawable = R.drawable.linkedin_icon
+        linkediIn.iconTint = R.color.blue_linkedin
 
         val url = "https://www.linkedin.com/in/antoniopinerosanchez/"
         linkediIn.setOnClickListener{
