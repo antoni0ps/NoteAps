@@ -43,10 +43,10 @@ class Add_Event_Activity : AppCompatActivity() {
 
 
     private fun addEventToDatabase(
-        userUid: String, eventId: String, userName: String, email: String,
+        eventId: String, userName: String, email: String,
         title: String, description: String, eventDate: String, eventHour: String
     ) {
-        val event = Event(userUid, eventId, userName, email, title, description, eventDate, eventHour)
+        val event = Event(eventId, userName, email, title, description, eventDate, eventHour)
 
         db.child("users").child(emailPath).child("user_events").child(eventId).setValue(event)
             .addOnSuccessListener {
@@ -65,7 +65,6 @@ class Add_Event_Activity : AppCompatActivity() {
             val eventDate = binding.tvFinishDate.text.toString()
             val eventTime = binding.tvTime.text.toString()
             val eventId = db.push().key
-            val userUid = currentUser!!.uid
 
             if (userName.isEmpty() || email.isEmpty() || title.isEmpty() || description.isEmpty()) {
                 Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
@@ -77,7 +76,7 @@ class Add_Event_Activity : AppCompatActivity() {
 
                 if (switchButton.isChecked) {
                     Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
-                    addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
+                    addEventToDatabase(eventId!!, userName, email, title, description, eventDate, eventTime)
                     onBackPressed()
 
                     val intent = Intent()
@@ -89,7 +88,7 @@ class Add_Event_Activity : AppCompatActivity() {
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "Agregando evento a la Base de Datos...", Toast.LENGTH_SHORT).show()
-                    addEventToDatabase(userUid, eventId!!, userName, email, title, description, eventDate, eventTime)
+                    addEventToDatabase(eventId!!, userName, email, title, description, eventDate, eventTime)
                     onBackPressed()
                 }
 

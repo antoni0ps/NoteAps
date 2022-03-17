@@ -108,22 +108,21 @@ class Add_Task_Activity : AppCompatActivity() {
         val taskDate = binding.tvFinishDate.text.toString()
         val status = binding.tvStatus.text.toString()
         val taskId = db.push().key
-        val userUid = currentUser!!.uid
 
         if (userName.isEmpty() || email.isEmpty() || actualDate.isEmpty() || title.isEmpty() || description.isEmpty() || taskDate.isEmpty()) {
             Toast.makeText(this, "Debes rellenar todos los campos", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Agregando tarea a la Base de Datos...", Toast.LENGTH_SHORT).show()
-            addTaskToDatabase(userUid, taskId!!, userName, email, actualDate, title, description, taskDate, status)
+            addTaskToDatabase(taskId!!, userName, email, actualDate, title, description, taskDate, status)
             onBackPressed()
         }
     }
 
     private fun addTaskToDatabase(
-        userUid: String, taskId: String, userName: String, email: String, actualDate: String,
+        taskId: String, userName: String, email: String, actualDate: String,
         title: String, description: String, taskDate: String, status: String
     ) {
-        val task = Task(userUid, taskId, userName, email, actualDate, title, description, taskDate, status)
+        val task = Task(taskId, userName, email, actualDate, title, description, taskDate, status)
         db.child("users").child(emailPath).child("user_tasks").child(taskId).setValue(task)
             .addOnSuccessListener {
                 Toast.makeText(this,"Tarea agregada con éxito",Toast.LENGTH_SHORT).show()

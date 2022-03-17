@@ -56,7 +56,7 @@ class Detail_Note_Activity : AppCompatActivity() {
         db.child("users").child(emailPath).child("user_notes").child(noteId!!).child("title").setValue(binding.tvTitle.text.toString())
         db.child("users").child(emailPath).child("user_notes").child(noteId).child("content").setValue(binding.tvContent.text.toString())
             .addOnSuccessListener {
-                Toast.makeText(this, "Nota actualizada con en la base de datos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Nota actualizada.", Toast.LENGTH_SHORT).show()
 
             }
     }

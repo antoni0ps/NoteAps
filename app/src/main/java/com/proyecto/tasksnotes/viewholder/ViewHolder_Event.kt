@@ -23,7 +23,7 @@ class ViewHolder_Event(var mView: View) : RecyclerView.ViewHolder(mView) {
     }
 
     fun setOnClickListener(clickListener: ClickListener) {
-        mClickListener = clickListener!!
+        mClickListener = clickListener
     }
 
     fun setData(
@@ -32,8 +32,6 @@ class ViewHolder_Event(var mView: View) : RecyclerView.ViewHolder(mView) {
     ) {
 
         //Establecemos conexión con el item
-
-
         item_eventId = mView.findViewById(R.id.item_event_Id)
         item_userName = mView.findViewById(R.id.event_userName)
         item_email = mView.findViewById(R.id.event_email)

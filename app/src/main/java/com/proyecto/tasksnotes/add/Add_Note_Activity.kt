@@ -1,17 +1,14 @@
 package com.proyecto.tasksnotes.add
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.proyecto.tasksnotes.model.Note
 import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.databinding.ActivityAddNoteBinding
+import com.proyecto.tasksnotes.model.Note
 import java.util.*
 
 class Add_Note_Activity : AppCompatActivity() {
@@ -29,7 +26,7 @@ class Add_Note_Activity : AppCompatActivity() {
 
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
-        emailPath = auth.currentUser?.email!!.replace(".",",")
+        emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         binding.noteSaveButton.setOnClickListener {
             getAndValidateData()
@@ -38,10 +35,10 @@ class Add_Note_Activity : AppCompatActivity() {
     }
 
 
-    private fun addNoteToDatabase(userUid: String, noteId: String, email: String, title: String, content: String, colorCode: Int) {
+    private fun addNoteToDatabase(noteId: String, email: String, title: String, content: String, colorCode: Int) {
 
 
-        val note = Note(userUid, noteId, email, title, content, colorCode)
+        val note = Note(noteId, email, title, content, colorCode)
 
         db.child("users").child(emailPath).child("user_notes").child(noteId).setValue(note)
             .addOnCompleteListener {
@@ -52,7 +49,6 @@ class Add_Note_Activity : AppCompatActivity() {
 
     private fun getAndValidateData() {
 
-        val userId = auth.currentUser!!.uid
         val title = binding.etTitle.text.toString()
         val content = binding.etContent.text.toString()
         val noteId = db.push().key
@@ -62,7 +58,7 @@ class Add_Note_Activity : AppCompatActivity() {
         if (title.isEmpty() || content.isEmpty()) {
             Toast.makeText(applicationContext, "Debes rellenar Título y Descripción", Toast.LENGTH_SHORT).show()
         } else {
-            addNoteToDatabase(userId, noteId!!, email, title, content, colorCode)
+            addNoteToDatabase(noteId!!, email, title, content, colorCode)
             onBackPressed()
         }
     }
