@@ -33,7 +33,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/monserrat_regular"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Para completar su registro, por favor, revise su correo y pulse sobre el enlace de verificación.\nDespués, haga click en continuar." />
 
@@ -64,6 +64,47 @@
             android:paddingRight="64dp"
             android:text="Log out"
             android:textColor="@color/darker_grey" />
+
+        <TextView
+            android:id="@+id/tvResendEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/monserrat_regular"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:text="¿Desea que se lo volvamos a enviar?"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/tvTexResend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/monserrat_regular"
+                android:gravity="center"
+                android:text="Click  "/>
+
+            <TextView
+                android:id="@+id/tvButtonResend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/monserrat_regular"
+                android:textSize="16dp"
+                android:textColor="@color/primary_dark"
+                android:gravity="center"
+                android:text="aquí "/>
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

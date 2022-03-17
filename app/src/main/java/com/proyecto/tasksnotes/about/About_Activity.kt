@@ -50,7 +50,9 @@ class About_Activity : AppCompatActivity() {
         val aboutPage: View = AboutPage(this)
             .isRTL(false)
             .setDescription("Aplicación creada como proyecto final del ciclo" +
-                    " de grado superior de Desarrollo de Aplicaciones Multiplataforma.")
+                    " de grado superior de Desarrollo de Aplicaciones Multiplataforma.\n\n" +
+                    "NoteAps es un organizador personal donde puedes almacenar tus notas, tareas " +
+                    "y eventos de manera unficada y eficiente.")
             .setImage(R.drawable.icono_app_completo_150px)
             .addItem(name)
             .addItem(versionElement)

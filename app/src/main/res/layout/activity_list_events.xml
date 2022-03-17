@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewEvents"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addEventButton"
@@ -17,12 +17,12 @@
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="48dp"
         android:layout_marginBottom="48dp"
         android:elevation="8dp"
         android:src="@drawable/ic_add"
         android:translationZ="8dp"
-        app:backgroundTint="@color/primary"
+        app:backgroundTint="@color/lightGreen"
         app:tint="@color/darker_grey" />
 
 </RelativeLayout>

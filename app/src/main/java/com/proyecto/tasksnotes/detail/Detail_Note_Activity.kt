@@ -1,17 +1,13 @@
 package com.proyecto.tasksnotes.detail
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.databinding.ActivityDetailNoteBinding
 
 
@@ -31,11 +27,14 @@ class Detail_Note_Activity : AppCompatActivity() {
 
         db = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
-        emailPath = auth.currentUser?.email!!.replace(".",",")
+        emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         getAndSetData()
+
         binding.noteSaveButton.setOnClickListener {
-            updateDatainDatabase()
+            Toast.makeText(this, "Actualizando nota...", Toast.LENGTH_SHORT).show()
+            updateNoteinDatabase()
+            onBackPressed()
         }
     }
 
@@ -50,15 +49,15 @@ class Detail_Note_Activity : AppCompatActivity() {
         binding.tvContent.setBackgroundColor(resources.getColor(intent.getIntExtra("colorCode", 0), null))
     }
 
-    private fun updateDatainDatabase() {
+    private fun updateNoteinDatabase() {
 
         val noteId = intent.getStringExtra("noteId")
 
         db.child("users").child(emailPath).child("user_notes").child(noteId!!).child("title").setValue(binding.tvTitle.text.toString())
         db.child("users").child(emailPath).child("user_notes").child(noteId).child("content").setValue(binding.tvContent.text.toString())
-            .addOnCompleteListener {
-                Toast.makeText(this, "Nota Actualizada con éxito.", Toast.LENGTH_SHORT).show()
-                onBackPressed()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Nota actualizada con en la base de datos.", Toast.LENGTH_SHORT).show()
+
             }
     }
 

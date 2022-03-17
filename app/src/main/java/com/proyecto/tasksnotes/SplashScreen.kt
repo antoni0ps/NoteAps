@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
 
@@ -35,7 +34,6 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else if (firebaseUser != null && !firebaseUser.isEmailVerified) {
-            sendEmailVerification()
             startActivity(Intent(this, EmailVerificationActivity::class.java))
             finish()
         } else {
@@ -44,13 +42,4 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 
-    private fun sendEmailVerification() {
-        val user = auth.currentUser
-        user!!.sendEmailVerification().addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(this, "Se envio un correo de verificación",
-                    Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 }

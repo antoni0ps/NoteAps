@@ -1,20 +1,16 @@
 package com.proyecto.tasksnotes
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.proyecto.tasksnotes.add.Add_Note_Activity
-import com.proyecto.tasksnotes.add.Add_Task_Activity
-import com.proyecto.tasksnotes.list.List_Notes
-import com.proyecto.tasksnotes.list.List_Tasks
 import com.proyecto.tasksnotes.about.About_Activity
 import com.proyecto.tasksnotes.databinding.ActivityMenuBinding
 import com.proyecto.tasksnotes.list.List_Events
-import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
+import com.proyecto.tasksnotes.list.List_Notes
+import com.proyecto.tasksnotes.list.List_Tasks
 
 class MenuActivity : AppCompatActivity() {
 
@@ -22,6 +18,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var usuarios: DatabaseReference
     private lateinit var user: FirebaseUser
+    private lateinit var dbStatus: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +28,13 @@ class MenuActivity : AppCompatActivity() {
 
         usuarios = FirebaseDatabase.getInstance().getReference("users")
         auth = FirebaseAuth.getInstance()
+        dbStatus = FirebaseDatabase.getInstance().getReference(".info/connected")
 
 
         /* Llamamos a la funcion loadData al iniciar para comprobar si existe un usuario logueado,
         si existe el usuario se le envia al menu principal, en caso contrario se envía a la
         actividad de login */
+
 
         loadData()
 
@@ -65,39 +64,70 @@ class MenuActivity : AppCompatActivity() {
     private fun loadData() {
 
         user = auth.currentUser!!
-        if (user != null) {
-            val emailPath = auth.currentUser?.email!!.replace(".", ",")
-            usuarios.child(emailPath).addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
 
-                    if (snapshot.exists()) {
+        dbStatus.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
 
-                        val name = "" + snapshot.child("name").value
-                        val surname = " " + snapshot.child("surname").value
-                        val email = "" + snapshot.child("email").value
+                val connected = snapshot.getValue(Boolean::class.java)
+                if (connected!!) {
+                    val emailPath = auth.currentUser?.email!!.replace(".", ",")
+                    usuarios.child(emailPath).addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
 
-                        // En caso de que exista un usuario logueado seteamos el texto con su nombre y su email
-                        binding.tvName.text = "$name $surname"
-                        binding.tvEmail.text = email
+                            if (snapshot.exists()) {
 
-                        //Si existe usuario logueado habilitamos los botones del menu
-                        binding.myEventsButton.isEnabled = true
-                        binding.myNotesButton.isEnabled = true
-                        binding.myTasksButton.isEnabled = true
-                        binding.aboutButton.isEnabled = true
-                        binding.logoutButton.isEnabled = true
+                                val name = "" + snapshot.child("name").value
+                                val surname = " " + snapshot.child("surname").value
+                                val email = "" + snapshot.child("email").value
+
+                                // En caso de que exista un usuario logueado seteamos el texto con su nombre y su email
+
+                                with(binding) {
+                                    tvName.text = "$name $surname"
+                                    tvEmail.text = email
+                                    tvWelcome.text = "Bienvenido(a)"
+                                    myEventsButton.isClickable = true
+                                    myNotesButton.isClickable = true
+                                    myTasksButton.isClickable = true
+                                    logoutButton.isClickable = true
+                                }
+
+
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+
+                        }
+                    })
+                } else {
+                    with(binding) {
+                        tvName.text = ""
+                        tvEmail.text = ""
+                        tvWelcome.text = "Sin conexión."
+                        myEventsButton.isClickable = false
+                        myNotesButton.isClickable = false
+                        myTasksButton.isClickable = false
+                        logoutButton.isClickable = false
                     }
                 }
+            }
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
-        }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+    override fun onResume() {
+        loadData()
+        super.onResume()
     }
 
     private fun logOutApp() {
         auth.signOut()
         startActivity(Intent(this, MainActivity::class.java))
-        Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show()
     }
 
 }

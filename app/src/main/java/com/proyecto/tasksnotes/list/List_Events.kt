@@ -2,12 +2,14 @@ package com.proyecto.tasksnotes.list
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -33,7 +35,7 @@ class List_Events : AppCompatActivity() {
     private lateinit var options: FirebaseRecyclerOptions<Event>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
-    private lateinit var emailPath : String
+    private lateinit var emailPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +49,7 @@ class List_Events : AppCompatActivity() {
         recyclerViewEvents.setHasFixedSize(true)
         db = FirebaseDatabase.getInstance()
         dataBaseReference = db.getReference("users")
-        emailPath = auth.currentUser?.email!!.replace(".",",")
+        emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         listEvents()
 
@@ -109,11 +111,12 @@ class List_Events : AppCompatActivity() {
 
                     val eventId = getItem(position).eventId
                     val popupMenu = PopupMenu(applicationContext, menuIcon)
-                    popupMenu.menu.add("Eliminar Evento").setOnMenuItemClickListener({
+                    popupMenu.menu.add("Eliminar Evento").setOnMenuItemClickListener {
 
-                        deleteEvent(eventId!!)
+
+                        deleteEvent(eventId!!, position)
                         false
-                    })
+                    }
 
                     popupMenu.show()
                 }
@@ -128,20 +131,23 @@ class List_Events : AppCompatActivity() {
 
     }
 
-    private fun deleteEvent(eventId: String) {
+    private fun deleteEvent(eventId: String, position: Int) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Eliminar Evento")
         builder.setMessage("¿Desea eliminar el evento?")
 
         builder.setPositiveButton("SI") { dialogInterface, i ->
 
-            val query = dataBaseReference.child(firebaseUser.uid).child("events").orderByChild("eventId").equalTo(eventId)
+            Toast.makeText(applicationContext, "Eliminando evento...", Toast.LENGTH_SHORT).show()
+
+            val query = dataBaseReference.child(emailPath).child("user_events").orderByChild("eventId").equalTo(eventId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (ds in snapshot.children) {
                         ds.ref.removeValue()
-                            .addOnCompleteListener {
+                            .addOnSuccessListener {
+                                adapter.notifyItemRemoved(position)
                                 Toast.makeText(applicationContext, "Evento eliminado correctamente", Toast.LENGTH_SHORT).show()
                             }
                     }

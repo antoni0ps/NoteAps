@@ -70,21 +70,8 @@ class MainActivity : AppCompatActivity() {
             goToMenu()
             finish()
         } else {
-            sendEmailVerification()
             startActivity(Intent(this, EmailVerificationActivity::class.java))
             finish()
-        }
-    }
-
-    private fun sendEmailVerification() {
-        val user = auth.currentUser
-        user!!.sendEmailVerification().addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(
-                    this, "Se envio un correo de verificación",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
     }
 

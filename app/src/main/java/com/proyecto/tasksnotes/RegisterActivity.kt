@@ -97,7 +97,7 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     sendEmailVerification()
-                    sendData()
+                    addTempUser()
                 } else if (email == queryEmail) {
                     Toast.makeText(this, "Este email ya está registrado, por favor pruebe con otro diferente.",
                         Toast.LENGTH_LONG).show()
@@ -113,21 +113,20 @@ class RegisterActivity : AppCompatActivity() {
         val user = auth.currentUser
         user!!.sendEmailVerification().addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                Toast.makeText(this, "Se envio un correo de verificación",
+                Toast.makeText(this, "Se ha enviado un correo de verificación",
                     Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun addUser() {
+    private fun addTempUser() {
         val uid = auth.uid
         val user = User(uid, name, surname, email)
         val emailPath = auth.currentUser?.email!!.replace(".", ",")
-        val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+        val databaseReference = FirebaseDatabase.getInstance().getReference("usersTemp")
         databaseReference.child(emailPath).setValue(user)
             .addOnSuccessListener {
-                Toast.makeText(this, "Cuenta creada con éxito", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MenuActivity::class.java))
+                startActivity(Intent(this,EmailVerificationActivity::class.java))
                 finish()
             }.addOnFailureListener { e ->
                 Toast.makeText(this, "" + e.message, Toast.LENGTH_SHORT).show()
@@ -135,15 +134,15 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun sendData(){
-        val intent = Intent(this, EmailVerificationActivity::class.java)
-        name = binding.editTextName.text.toString().trim()
-        surname = binding.editTextSurname.text.toString().trim()
-        intent.putExtra("name", name)
-        intent.putExtra("surname", surname)
-        startActivity(intent)
-        finish()
-    }
+//    private fun sendData(){
+//        val intent = Intent(this, EmailVerificationActivity::class.java)
+//        name = binding.editTextName.text.toString().trim()
+//        surname = binding.editTextSurname.text.toString().trim()
+//        intent.putExtra("name", name)
+//        intent.putExtra("surname", surname)
+//        startActivity(intent)
+//        finish()
+//    }
 
     override fun onBackPressed() {
         finish()

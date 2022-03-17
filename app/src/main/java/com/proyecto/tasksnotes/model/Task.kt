@@ -1,5 +1,7 @@
 package com.proyecto.tasksnotes.model
 
+import android.widget.Toast
+
 class Task {
     var userUid: String? = null
     var taskId: String? = null
@@ -24,4 +26,5 @@ class Task {
         this.taskDate = finishDate
         this.status = status
     }
+
 }

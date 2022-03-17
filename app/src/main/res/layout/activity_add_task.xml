@@ -42,7 +42,7 @@
                 android:fontFamily="@font/monserrat_regular"
                 android:hint="Nombre usuario"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <!--CORREO DEL USUARIO-->
             <TextView
@@ -52,7 +52,7 @@
                 android:fontFamily="@font/monserrat_regular"
                 android:hint="Correo electrónico"
                 android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <!--ICONO - TEXTVIEW-->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -72,9 +72,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/monserrat_regular"
-                    android:text="Fecha de registro: "
+                    android:text="F. registro: "
                     android:textColor="@color/dark_grey"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <!--FECHA Y HORA ACTUAL DEL DISPOSITIVO-->
                 <TextView

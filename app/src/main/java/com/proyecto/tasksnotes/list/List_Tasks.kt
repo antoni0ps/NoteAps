@@ -155,6 +155,8 @@ class List_Tasks : AppCompatActivity() {
         //Metodo que se ejecutará si el usuario confirma que quiere eliminar la nota
         builder.setPositiveButton("SI") { dialogInterface, i ->
 
+            Toast.makeText(applicationContext, "Eliminando tarea...", Toast.LENGTH_SHORT).show()
+
             //Eliminamos nota de la Base de datos
             val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId").equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -207,11 +209,13 @@ class List_Tasks : AppCompatActivity() {
                         if (status.equals("No finalizada")) {
                             ds.ref.child("status").setValue("Finalizada")
                                 .addOnSuccessListener {
+                                    adapter.notifyDataSetChanged()
                                     Toast.makeText(applicationContext, "Tarea finalizada", Toast.LENGTH_SHORT).show()
                                 }
                         } else {
                             ds.ref.child("status").setValue("No finalizada")
                                 .addOnSuccessListener {
+                                    adapter.notifyDataSetChanged()
                                     Toast.makeText(applicationContext, "Tarea no finalizada", Toast.LENGTH_SHORT).show()
                                 }
 

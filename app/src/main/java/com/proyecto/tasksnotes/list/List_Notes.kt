@@ -2,7 +2,6 @@ package com.proyecto.tasksnotes.list
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
@@ -10,6 +9,7 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -18,13 +18,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.proyecto.tasksnotes.detail.Detail_Note_Activity
-import com.proyecto.tasksnotes.model.Note
 import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.add.Add_Note_Activity
-import com.proyecto.tasksnotes.viewholder.ViewHolder_Note
 import com.proyecto.tasksnotes.databinding.ActivityListNotesBinding
-import java.util.*
+import com.proyecto.tasksnotes.detail.Detail_Note_Activity
+import com.proyecto.tasksnotes.model.Note
+import com.proyecto.tasksnotes.viewholder.ViewHolder_Note
 
 class List_Notes : AppCompatActivity() {
 
@@ -51,7 +50,7 @@ class List_Notes : AppCompatActivity() {
         recyclerViewNotes.setHasFixedSize(true)
         db = FirebaseDatabase.getInstance()
         databaseReference = db.getReference("users")
-        emailPath = auth.currentUser?.email!!.replace(".",",")
+        emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         binding.addNoteButton.setOnClickListener {
             val intent = Intent(this, Add_Note_Activity::class.java)
@@ -74,8 +73,7 @@ class List_Notes : AppCompatActivity() {
 
                 holder.setData(applicationContext, model.title, model.content)
                 val colorCode = model.colorCode
-                val mCardView: CardView
-                mCardView = holder.mView.findViewById(R.id.noteCard)
+                val mCardView: CardView = holder.mView.findViewById(R.id.noteCard)
                 mCardView.setCardBackgroundColor(holder.mView.resources.getColor(colorCode!!, null))
 
                 holder.setOnClickListener(object : ViewHolder_Note.ClickListener {
@@ -105,35 +103,7 @@ class List_Notes : AppCompatActivity() {
                     popupMenu.gravity = Gravity.END
                     popupMenu.menu.add("Eliminar").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
 
-                        val builder = AlertDialog.Builder(this@List_Notes)
-                        builder.setTitle("Eliminar nota")
-                        builder.setMessage("¿Desea eliminar la nota?")
-                        builder.setPositiveButton("SI") { dialogInterface, i ->
-
-                            val query = databaseReference.orderByChild("noteId").equalTo(noteId)
-                            query.addListenerForSingleValueEvent(object : ValueEventListener {
-                                override fun onDataChange(snapshot: DataSnapshot) {
-
-                                    for (ds in snapshot.children) {
-                                        ds.ref.removeValue()
-                                            .addOnSuccessListener {
-                                                Toast.makeText(applicationContext, "Nota eliminada", Toast.LENGTH_SHORT).show()
-
-                                            }
-                                            .addOnFailureListener {
-                                                Toast.makeText(applicationContext, "No se pudo eliminar la nota", Toast.LENGTH_SHORT).show()
-                                            }
-                                    }
-                                }
-
-                                override fun onCancelled(error: DatabaseError) {}
-                            })
-                        }
-                        builder.setNegativeButton("NO") { dialogInterface, i ->
-                            Toast.makeText(applicationContext, "La nota no ha sido eliminada", Toast.LENGTH_SHORT).show()
-                        }
-                        builder.create().show()
-
+                        deleteNote(noteId!!, position)
                         false
                     })
                     popupMenu.show()
@@ -151,6 +121,40 @@ class List_Notes : AppCompatActivity() {
         layoutMan = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerViewNotes.layoutManager = layoutMan
         recyclerViewNotes.adapter = adapter
+    }
+
+    private fun deleteNote(noteId: String, position: Int) {
+        val builder = AlertDialog.Builder(this@List_Notes)
+        builder.setTitle("Eliminar nota")
+        builder.setMessage("¿Desea eliminar la nota?")
+        builder.setPositiveButton("SI") { dialogInterface, i ->
+
+            Toast.makeText(applicationContext, "Eliminando nota...", Toast.LENGTH_SHORT).show()
+
+            val query = databaseReference.child(emailPath).child("user_notes").orderByChild("noteId").equalTo(noteId)
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    for (ds in snapshot.children) {
+                        ds.ref.removeValue()
+                            .addOnSuccessListener {
+                                adapter.notifyItemRemoved(position)
+                                Toast.makeText(applicationContext, "Nota eliminada", Toast.LENGTH_SHORT).show()
+
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(applicationContext, "No se pudo eliminar la nota", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+        }
+        builder.setNegativeButton("NO") { dialogInterface, i ->
+            Toast.makeText(applicationContext, "La nota no ha sido eliminada", Toast.LENGTH_SHORT).show()
+        }
+        builder.create().show()
     }
 
     override fun onBackPressed() {
