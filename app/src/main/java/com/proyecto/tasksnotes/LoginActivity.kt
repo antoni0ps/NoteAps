@@ -7,19 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.proyecto.tasksnotes.databinding.ActivityMainBinding
+import com.proyecto.tasksnotes.databinding.ActivityLoginBinding
 import com.proyecto.tasksnotes.recovery.AccountRecoveryActivity
 import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
 
@@ -52,14 +52,9 @@ class MainActivity : AppCompatActivity() {
     private fun SignIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    checkVerification()
-                } else {
-                    Toast.makeText(
-                        this, "Correo o contraseña icorrectos.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                if (task.isSuccessful) { checkVerification()
+                } else { Toast.makeText(this,
+                    "Correo o contraseña icorrectos.", Toast.LENGTH_SHORT).show() }
             }
     }
 

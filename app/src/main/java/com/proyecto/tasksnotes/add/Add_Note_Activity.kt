@@ -36,16 +36,10 @@ class Add_Note_Activity : AppCompatActivity() {
 
 
     private fun addNoteToDatabase(noteId: String, email: String, title: String, content: String, colorCode: Int) {
-
-
         val note = Note(noteId, email, title, content, colorCode)
-
         db.child("users").child(emailPath).child("user_notes").child(noteId).setValue(note)
             .addOnCompleteListener {
-                Toast.makeText(this, "Nota agregada con éxito.", Toast.LENGTH_SHORT).show()
-
-            }
-    }
+                Toast.makeText(this, "Nota agregada con éxito.", Toast.LENGTH_SHORT).show() }}
 
     private fun getAndValidateData() {
 

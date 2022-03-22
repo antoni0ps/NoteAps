@@ -99,7 +99,8 @@ class RegisterActivity : AppCompatActivity() {
                     sendEmailVerification()
                     addTempUser()
                 } else if (email == queryEmail) {
-                    Toast.makeText(this, "Este email ya está registrado, por favor pruebe con otro diferente.",
+                    Toast.makeText(this, "Este email ya está registrado," +
+                            " por favor pruebe con otro diferente.",
                         Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(

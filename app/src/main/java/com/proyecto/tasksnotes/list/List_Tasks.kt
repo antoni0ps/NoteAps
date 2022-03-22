@@ -4,7 +4,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -115,25 +118,26 @@ class List_Tasks : AppCompatActivity() {
                     val taskId = getItem(position).taskId
                     val popupMenu = PopupMenu(applicationContext, menuIcon)
                     popupMenu.gravity = Gravity.END
-                    popupMenu.menu.add("Marcar Finalizada").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
+                    popupMenu.menu.add("Marcar Finalizada").setOnMenuItemClickListener {
 
                         updateStatus(taskId!!, taskStatus!!)
 
                         false
-                    })
+                    }
 
-                    popupMenu.menu.add("Eliminar tarea").setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener {
+                    popupMenu.menu.add("Eliminar tarea").setOnMenuItemClickListener {
 
                         deleteTask(taskId!!)
                         false
-                    })
+                    }
                     popupMenu.show()
                 }
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Task {
 
-                val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
+                val view: View =
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
                 val taskViewholder = ViewHolder_Task(view)
                 return taskViewholder
             }
@@ -158,14 +162,20 @@ class List_Tasks : AppCompatActivity() {
             Toast.makeText(applicationContext, "Eliminando tarea...", Toast.LENGTH_SHORT).show()
 
             //Eliminamos nota de la Base de datos
-            val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId").equalTo(taskId)
+            val query =
+                dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId")
+                    .equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (ds in snapshot.children) {
                         ds.ref.removeValue()
                             .addOnCompleteListener {
-                                Toast.makeText(applicationContext, "Tarea eliminada", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Tarea eliminada",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                     }
                 }
@@ -176,7 +186,8 @@ class List_Tasks : AppCompatActivity() {
             })
         }
         builder.setNegativeButton("NO") { dialogInterface, i ->
-            Toast.makeText(applicationContext, "La Tarea no ha sido eliminada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "La Tarea no ha sido eliminada", Toast.LENGTH_SHORT)
+                .show()
         }
         builder.create().show()
     }
@@ -197,7 +208,9 @@ class List_Tasks : AppCompatActivity() {
         //Metodo que se ejecutará si el usuario confirma que quiere actualizar el estado de la nota
         builder.setPositiveButton("SI") { dialogInterface, i ->
 
-            val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId").equalTo(taskId)
+            val query =
+                dataBaseReference.child(emailPath).child("user_tasks").orderByChild("taskId")
+                    .equalTo(taskId)
             query.addListenerForSingleValueEvent(object : ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -210,13 +223,21 @@ class List_Tasks : AppCompatActivity() {
                             ds.ref.child("status").setValue("Finalizada")
                                 .addOnSuccessListener {
                                     adapter.notifyDataSetChanged()
-                                    Toast.makeText(applicationContext, "Tarea finalizada", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Tarea finalizada",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         } else {
                             ds.ref.child("status").setValue("No finalizada")
                                 .addOnSuccessListener {
                                     adapter.notifyDataSetChanged()
-                                    Toast.makeText(applicationContext, "Tarea no finalizada", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Tarea no finalizada",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
 
                         }
@@ -229,7 +250,8 @@ class List_Tasks : AppCompatActivity() {
             })
         }
         builder.setNegativeButton("NO") { dialogInterface, i ->
-            Toast.makeText(applicationContext, "No se han realizado cambios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "No se han realizado cambios", Toast.LENGTH_SHORT)
+                .show()
         }
         builder.create().show()
     }

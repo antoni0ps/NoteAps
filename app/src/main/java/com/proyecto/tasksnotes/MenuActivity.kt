@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.proyecto.tasksnotes.about.About_Activity
 import com.proyecto.tasksnotes.databinding.ActivityMenuBinding
 import com.proyecto.tasksnotes.list.List_Events
 import com.proyecto.tasksnotes.list.List_Notes
@@ -127,7 +126,7 @@ class MenuActivity : AppCompatActivity() {
 
     private fun logOutApp() {
         auth.signOut()
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
 }

@@ -49,7 +49,7 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".about.About_Activity"
+            android:name=".About_Activity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

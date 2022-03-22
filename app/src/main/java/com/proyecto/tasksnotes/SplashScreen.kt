@@ -20,10 +20,7 @@ class SplashScreen : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         val time = 3800
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            checkUser()
-        }, time.toLong())
+        Handler(Looper.getMainLooper()).postDelayed({ checkUser() },time.toLong())
     }
 
     // Funcion para comprobar si hay algun usuario logueado y enviar a la activity correspondiente
@@ -31,7 +28,7 @@ class SplashScreen : AppCompatActivity() {
         val firebaseUser = auth.currentUser
 
         if (firebaseUser == null) {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         } else if (firebaseUser != null && !firebaseUser.isEmailVerified) {
             startActivity(Intent(this, EmailVerificationActivity::class.java))

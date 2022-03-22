@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.about
+package com.proyecto.tasksnotes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +13,6 @@ import android.view.Gravity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import com.proyecto.tasksnotes.R
 
 
 class About_Activity : AppCompatActivity() {
@@ -56,7 +55,7 @@ class About_Activity : AppCompatActivity() {
             .setImage(R.drawable.icono_app_completo_150px)
             .addItem(name)
             .addItem(versionElement)
-            .addItem(createSchool())
+            .addItem(addIlerna())
             .addEmail("anpisan@gmail.com")
             .addItem(addLinkedIn())
             .addItem(addGithub())
@@ -83,7 +82,7 @@ class About_Activity : AppCompatActivity() {
         return github
     }
 
-    private fun createSchool(): Element {
+    private fun addIlerna(): Element {
         val school = Element()
         school.title = "ILERNA Online"
         school.iconDrawable = R.drawable.ilerna_icon

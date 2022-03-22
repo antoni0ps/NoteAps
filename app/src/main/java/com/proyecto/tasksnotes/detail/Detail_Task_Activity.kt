@@ -18,7 +18,7 @@ class Detail_Task_Activity : AppCompatActivity() {
     }
 
     private fun getAndSetData() {
-
+        //Recibir datos desde la actividad listar tareas
         val username = intent.getStringExtra("userName_detail")
         val email = intent.getStringExtra("email_detail")
         val title = intent.getStringExtra("title_detail")

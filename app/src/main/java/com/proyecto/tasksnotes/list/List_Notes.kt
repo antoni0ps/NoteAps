@@ -69,17 +69,17 @@ class List_Notes : AppCompatActivity() {
         adapter = object : FirebaseRecyclerAdapter<Note, ViewHolder_Note>(options) {
 
             @RequiresApi(Build.VERSION_CODES.M)
-            override fun onBindViewHolder(holder: ViewHolder_Note, position: Int, model: Note) {
+            override fun onBindViewHolder(holder: ViewHolder_Note, position: Int, note: Note) {
 
-                holder.setData(applicationContext, model.title, model.content)
-                val colorCode = model.colorCode
+                holder.setData(applicationContext, note.title, note.content)
+                val colorCode = note.colorCode
                 val mCardView: CardView = holder.mView.findViewById(R.id.noteCard)
                 mCardView.setCardBackgroundColor(holder.mView.resources.getColor(colorCode!!, null))
 
                 holder.setOnClickListener(object : ViewHolder_Note.ClickListener {
                     override fun onItemClick(view: View?, position: Int) {
 
-                        //obtenerlos datos de la nota
+                        //obtener los datos de la nota
                         val title = getItem(holder.bindingAdapterPosition).title
                         val content = getItem(holder.bindingAdapterPosition).content
                         val colorCode = getItem(holder.bindingAdapterPosition).colorCode

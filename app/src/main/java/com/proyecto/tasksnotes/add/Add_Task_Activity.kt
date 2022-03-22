@@ -1,21 +1,14 @@
 package com.proyecto.tasksnotes.add
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.provider.CalendarContract
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.widget.TimePicker.OnTimeChangedListener
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.proyecto.tasksnotes.R
 import com.proyecto.tasksnotes.databinding.ActivityAddTaskBinding
 import com.proyecto.tasksnotes.model.Task
 import com.vivekkaushik.datepicker.OnDateSelectedListener
@@ -46,7 +39,7 @@ class Add_Task_Activity : AppCompatActivity() {
 
         getAndSetData()
         getDateAndTime()
-        createDatePickerAndTimePicker()
+        createDatePicker()
 
 
         binding.saveTaskButton.setOnClickListener {
@@ -54,7 +47,7 @@ class Add_Task_Activity : AppCompatActivity() {
         }
     }
 
-    private fun createDatePickerAndTimePicker() {
+    private fun createDatePicker() {
 
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -146,13 +139,8 @@ class Add_Task_Activity : AppCompatActivity() {
     }
 
     private fun getDateAndTime() {
-        val registerDateAndTime = SimpleDateFormat(
-            "dd-MM-yyyy/HH:mm",
-            Locale.getDefault()
-        ).format(System.currentTimeMillis())
-
-        binding.tvActualDate.text = registerDateAndTime
-    }
+        val registerDateAndTime = SimpleDateFormat("dd-MM-yyyy/HH:mm", Locale.getDefault()).format(System.currentTimeMillis())
+        binding.tvActualDate.text = registerDateAndTime }
 
 
     override fun onBackPressed() {
