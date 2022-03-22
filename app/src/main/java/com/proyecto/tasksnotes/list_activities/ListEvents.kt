@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.list
+package com.proyecto.tasksnotes.list_activities
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -18,20 +18,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.R
-import com.proyecto.tasksnotes.add.Add_Event_Activity
+import com.proyecto.tasksnotes.add_activities.AddEvent
 import com.proyecto.tasksnotes.databinding.ActivityListEventsBinding
-import com.proyecto.tasksnotes.detail.Detail_Event_Activity
+import com.proyecto.tasksnotes.detail_activities.DetailEvent
 import com.proyecto.tasksnotes.model.Event
-import com.proyecto.tasksnotes.viewholder.ViewHolder_Event
+import com.proyecto.tasksnotes.viewholder.ViewHolderEvent
 
-class List_Events : AppCompatActivity() {
+class ListEvents : AppCompatActivity() {
 
     private lateinit var binding: ActivityListEventsBinding
     private lateinit var recyclerViewEvents: RecyclerView
     private lateinit var db: FirebaseDatabase
     private lateinit var dataBaseReference: DatabaseReference
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: FirebaseRecyclerAdapter<Event, ViewHolder_Event>
+    private lateinit var adapter: FirebaseRecyclerAdapter<Event, ViewHolderEvent>
     private lateinit var options: FirebaseRecyclerOptions<Event>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
@@ -54,7 +54,7 @@ class List_Events : AppCompatActivity() {
         listEvents()
 
         binding.addEventButton.setOnClickListener {
-            startActivity(Intent(this, Add_Event_Activity::class.java))
+            startActivity(Intent(this, AddEvent::class.java))
         }
     }
 
@@ -63,13 +63,13 @@ class List_Events : AppCompatActivity() {
         val query = dataBaseReference.child(emailPath).child("user_events").orderByChild("event_date")
 
         options = FirebaseRecyclerOptions.Builder<Event>().setQuery(query, Event::class.java).build()
-        adapter = object : FirebaseRecyclerAdapter<Event, ViewHolder_Event>(options) {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Event {
+        adapter = object : FirebaseRecyclerAdapter<Event, ViewHolderEvent>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderEvent {
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
-                return ViewHolder_Event(view)
+                return ViewHolderEvent(view)
             }
 
-            override fun onBindViewHolder(eventViewHolder: ViewHolder_Event, position: Int, event: Event) {
+            override fun onBindViewHolder(eventViewHolder: ViewHolderEvent, position: Int, event: Event) {
 
                 eventViewHolder.setData(
                     applicationContext,
@@ -82,7 +82,7 @@ class List_Events : AppCompatActivity() {
                     event.event_time
                 )
 
-                eventViewHolder.setOnClickListener(object : ViewHolder_Event.ClickListener {
+                eventViewHolder.setOnClickListener(object : ViewHolderEvent.ClickListener {
 
                     override fun onItemClick(view: View?, position: Int) {
 
@@ -95,7 +95,7 @@ class List_Events : AppCompatActivity() {
                         val eventTime = getItem(position).event_time
 
                         //enviar datos del evento a la actividad detalle
-                        val intent = Intent(applicationContext, Detail_Event_Activity::class.java)
+                        val intent = Intent(applicationContext, DetailEvent::class.java)
                         intent.putExtra("userName_detail", userName)
                         intent.putExtra("email_detail", email)
                         intent.putExtra("title_detail", title)

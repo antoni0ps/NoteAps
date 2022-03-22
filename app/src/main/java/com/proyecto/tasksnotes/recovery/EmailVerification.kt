@@ -8,12 +8,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.*
-import com.proyecto.tasksnotes.LoginActivity
-import com.proyecto.tasksnotes.MenuActivity
+import com.proyecto.tasksnotes.Login
+import com.proyecto.tasksnotes.Menu
 import com.proyecto.tasksnotes.databinding.ActivityEmailVerificationBinding
 import com.proyecto.tasksnotes.model.User
 
-class EmailVerificationActivity : AppCompatActivity() {
+class EmailVerification : AppCompatActivity() {
 
     private lateinit var binding: ActivityEmailVerificationBinding
     private lateinit var auth: FirebaseAuth
@@ -102,7 +102,7 @@ class EmailVerificationActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         referenceTemp.child(emailPath).removeValue()
-                        startActivity(Intent(applicationContext, MenuActivity::class.java))
+                        startActivity(Intent(applicationContext, Menu::class.java))
                         finish()
                     }.addOnFailureListener { e ->
                         Toast.makeText(applicationContext, "" + e.message, Toast.LENGTH_SHORT)
@@ -147,7 +147,7 @@ class EmailVerificationActivity : AppCompatActivity() {
                         ).show()
                         referenceTemp.child(emailPath).removeValue()
                         auth.signOut()
-                        startActivity(Intent(applicationContext, LoginActivity::class.java))
+                        startActivity(Intent(applicationContext, Login::class.java))
                         finish()
                     }.addOnFailureListener { e ->
                         Toast.makeText(applicationContext, "" + e.message, Toast.LENGTH_SHORT)
@@ -184,7 +184,7 @@ class EmailVerificationActivity : AppCompatActivity() {
 
     private fun logOutApp() {
         auth.signOut()
-        startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, Login::class.java))
         finish()
         Toast.makeText(this, "Cerrando sesión...", Toast.LENGTH_SHORT).show()
     }

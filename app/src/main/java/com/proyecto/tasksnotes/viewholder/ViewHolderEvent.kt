@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyecto.tasksnotes.R
 
-class ViewHolder_Event(var mView: View) : RecyclerView.ViewHolder(mView) {
+class ViewHolderEvent(var mView: View) : RecyclerView.ViewHolder(mView) {
 
     private lateinit var mClickListener: ClickListener
     private lateinit var item_eventId: TextView

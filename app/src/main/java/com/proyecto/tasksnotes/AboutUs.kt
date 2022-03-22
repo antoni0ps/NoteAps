@@ -15,7 +15,7 @@ import android.content.Intent
 import android.net.Uri
 
 
-class About_Activity : AppCompatActivity() {
+class AboutUs : AppCompatActivity() {
 
     private lateinit var binding : ActivityAboutBinding
 

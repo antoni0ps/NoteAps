@@ -1,10 +1,10 @@
-package com.proyecto.tasksnotes.detail
+package com.proyecto.tasksnotes.detail_activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.proyecto.tasksnotes.databinding.ActivityDetailEventBinding
 
-class Detail_Event_Activity : AppCompatActivity() {
+class DetailEvent : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailEventBinding
 

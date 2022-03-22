@@ -13,46 +13,46 @@
         android:theme="@style/Theme.TasksNotes">
 
         <activity
-            android:name=".recovery.EmailVerificationActivity"
+            android:name=".recovery.EmailVerification"
             android:exported="false" />
         <activity
-            android:name=".recovery.AccountRecoveryActivity"
+            android:name=".recovery.AccountRecovery"
             android:exported="false" />
         <activity
-            android:name=".list.List_Events"
+            android:name=".list_activities.ListEvents"
             android:exported="false" />
         <activity
-            android:name=".add.Add_Event_Activity"
+            android:name=".add_activities.AddEvent"
             android:exported="false" />
         <activity
-            android:name=".detail.Detail_Event_Activity"
+            android:name=".detail_activities.DetailEvent"
             android:exported="false" />
         <activity
-            android:name=".detail.Detail_Note_Activity"
+            android:name=".detail_activities.DetailNote"
             android:exported="false" />
         <activity
-            android:name=".list.List_Notes"
+            android:name=".list_activities.ListNotes"
             android:exported="false" />
         <activity
-            android:name=".add.Add_Note_Activity"
+            android:name=".add_activities.AddNote"
             android:exported="false" />
         <activity
-            android:name=".detail.Detail_Task_Activity"
+            android:name=".detail_activities.DetailTask"
             android:exported="false" />
         <activity
-            android:name=".list.List_Tasks"
+            android:name=".list_activities.ListTasks"
             android:exported="false" />
         <activity
-            android:name=".add.Add_Task_Activity"
+            android:name=".add_activities.AddTask"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".Menu"
             android:exported="false" />
         <activity
-            android:name=".About_Activity"
+            android:name=".AboutUs"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

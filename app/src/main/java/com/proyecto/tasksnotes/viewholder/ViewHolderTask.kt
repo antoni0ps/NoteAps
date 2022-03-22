@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyecto.tasksnotes.R
 
-class ViewHolder_Task(var mView: View) : RecyclerView.ViewHolder(mView) {
+class ViewHolderTask(var mView: View) : RecyclerView.ViewHolder(mView) {
 
     private lateinit var mClickListener: ClickListener
     private lateinit var item_taskId: TextView
@@ -22,7 +22,7 @@ class ViewHolder_Task(var mView: View) : RecyclerView.ViewHolder(mView) {
     private lateinit var unfinishedTask_item: ImageView
 
 
-    interface ClickListener : ViewHolder_Event.ClickListener {
+    interface ClickListener : ViewHolderEvent.ClickListener {
         override fun onItemClick(view: View?, position: Int) //Se ejecuta al pulsar en el item
 //        fun onItemLongClick(view: View?, position: Int) //Se ejecuta al mantener presionado el item
     }

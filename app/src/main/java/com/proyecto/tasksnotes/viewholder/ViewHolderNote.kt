@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.proyecto.tasksnotes.R
 
-class ViewHolder_Note(var mView: View) : RecyclerView.ViewHolder(mView) {
+class ViewHolderNote(var mView: View) : RecyclerView.ViewHolder(mView) {
 
     private lateinit var mClickListener: ClickListener
     private lateinit var item_title: TextView

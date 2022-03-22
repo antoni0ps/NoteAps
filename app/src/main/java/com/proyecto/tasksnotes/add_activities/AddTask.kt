@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.add
+package com.proyecto.tasksnotes.add_activities
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class Add_Task_Activity : AppCompatActivity() {
+class AddTask : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddTaskBinding
     private lateinit var db: DatabaseReference

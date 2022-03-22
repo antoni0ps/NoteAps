@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import com.google.firebase.auth.FirebaseAuth
-import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
+import com.proyecto.tasksnotes.recovery.EmailVerification
 
 class SplashScreen : AppCompatActivity() {
 
@@ -28,13 +28,13 @@ class SplashScreen : AppCompatActivity() {
         val firebaseUser = auth.currentUser
 
         if (firebaseUser == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, Login::class.java))
             finish()
         } else if (firebaseUser != null && !firebaseUser.isEmailVerified) {
-            startActivity(Intent(this, EmailVerificationActivity::class.java))
+            startActivity(Intent(this, EmailVerification::class.java))
             finish()
         } else {
-            startActivity(Intent(this, MenuActivity::class.java))
+            startActivity(Intent(this, Menu::class.java))
             finish()
         }
     }

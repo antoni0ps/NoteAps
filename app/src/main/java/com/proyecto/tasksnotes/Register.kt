@@ -9,10 +9,10 @@ import android.widget.Toast
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.model.User
 import com.proyecto.tasksnotes.databinding.ActivityRegisterBinding
-import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
+import com.proyecto.tasksnotes.recovery.EmailVerification
 import java.util.regex.Pattern
 
-class RegisterActivity : AppCompatActivity() {
+class Register : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
@@ -127,7 +127,7 @@ class RegisterActivity : AppCompatActivity() {
         val databaseReference = FirebaseDatabase.getInstance().getReference("usersTemp")
         databaseReference.child(emailPath).setValue(user)
             .addOnSuccessListener {
-                startActivity(Intent(this,EmailVerificationActivity::class.java))
+                startActivity(Intent(this,EmailVerification::class.java))
                 finish()
             }.addOnFailureListener { e ->
                 Toast.makeText(this, "" + e.message, Toast.LENGTH_SHORT).show()

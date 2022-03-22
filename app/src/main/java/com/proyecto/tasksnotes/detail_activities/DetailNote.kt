@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.detail
+package com.proyecto.tasksnotes.detail_activities
 
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.proyecto.tasksnotes.databinding.ActivityDetailNoteBinding
 
 
-class Detail_Note_Activity : AppCompatActivity() {
+class DetailNote : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailNoteBinding
     private lateinit var db: DatabaseReference

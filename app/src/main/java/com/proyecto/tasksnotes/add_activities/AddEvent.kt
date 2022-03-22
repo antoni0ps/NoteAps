@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.add
+package com.proyecto.tasksnotes.add_activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -16,7 +16,7 @@ import com.vivekkaushik.datepicker.OnDateSelectedListener
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Add_Event_Activity : AppCompatActivity() {
+class AddEvent : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddEventBinding
     private lateinit var db: DatabaseReference

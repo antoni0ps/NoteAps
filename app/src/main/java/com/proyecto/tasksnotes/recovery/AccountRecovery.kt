@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.proyecto.tasksnotes.LoginActivity
+import com.proyecto.tasksnotes.Login
 import com.proyecto.tasksnotes.databinding.ActivityAccountRecoveryBinding
 
-class AccountRecoveryActivity : AppCompatActivity() {
+class AccountRecovery : AppCompatActivity() {
 
     private lateinit var binding: ActivityAccountRecoveryBinding
     private lateinit var auth: FirebaseAuth
@@ -26,7 +26,7 @@ class AccountRecoveryActivity : AppCompatActivity() {
             val email = binding.emailEditText.text.toString()
             auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, Login::class.java))
                 } else {
                     Toast.makeText(this, "Ingrese un email válido", Toast.LENGTH_SHORT).show()
                 }

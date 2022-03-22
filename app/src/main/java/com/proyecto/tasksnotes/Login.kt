@@ -8,10 +8,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.proyecto.tasksnotes.databinding.ActivityLoginBinding
-import com.proyecto.tasksnotes.recovery.AccountRecoveryActivity
-import com.proyecto.tasksnotes.recovery.EmailVerificationActivity
+import com.proyecto.tasksnotes.recovery.AccountRecovery
+import com.proyecto.tasksnotes.recovery.EmailVerification
 
-class LoginActivity : AppCompatActivity() {
+class Login : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvRecoveryAccount.setOnClickListener {
-            startActivity(Intent(this, AccountRecoveryActivity::class.java))
+            startActivity(Intent(this, AccountRecovery::class.java))
         }
     }
 
@@ -65,18 +65,18 @@ class LoginActivity : AppCompatActivity() {
             goToMenu()
             finish()
         } else {
-            startActivity(Intent(this, EmailVerificationActivity::class.java))
+            startActivity(Intent(this, EmailVerification::class.java))
             finish()
         }
     }
 
     private fun goToMenu() {
-        val intent = Intent(this, MenuActivity::class.java)
+        val intent = Intent(this, Menu::class.java)
         this.startActivity(intent)
     }
 
     private fun goToRegister() {
-        val intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this, Register::class.java)
         startActivity(intent)
     }
 

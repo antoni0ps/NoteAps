@@ -7,11 +7,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.databinding.ActivityMenuBinding
-import com.proyecto.tasksnotes.list.List_Events
-import com.proyecto.tasksnotes.list.List_Notes
-import com.proyecto.tasksnotes.list.List_Tasks
+import com.proyecto.tasksnotes.list_activities.ListEvents
+import com.proyecto.tasksnotes.list_activities.ListNotes
+import com.proyecto.tasksnotes.list_activities.ListTasks
 
-class MenuActivity : AppCompatActivity() {
+class Menu : AppCompatActivity() {
 
     private lateinit var binding: ActivityMenuBinding
     private lateinit var auth: FirebaseAuth
@@ -38,19 +38,19 @@ class MenuActivity : AppCompatActivity() {
         loadData()
 
         binding.myTasksButton.setOnClickListener {
-            startActivity(Intent(this, List_Tasks::class.java))
+            startActivity(Intent(this, ListTasks::class.java))
         }
 
         binding.myNotesButton.setOnClickListener {
-            startActivity(Intent(this, List_Notes::class.java))
+            startActivity(Intent(this, ListNotes::class.java))
         }
 
         binding.myEventsButton.setOnClickListener {
-            startActivity(Intent(this, List_Events::class.java))
+            startActivity(Intent(this, ListEvents::class.java))
         }
 
         binding.aboutButton.setOnClickListener {
-            startActivity(Intent(this, About_Activity::class.java))
+            startActivity(Intent(this, AboutUs::class.java))
         }
 
         binding.logoutButton.setOnClickListener {
@@ -126,7 +126,7 @@ class MenuActivity : AppCompatActivity() {
 
     private fun logOutApp() {
         auth.signOut()
-        startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, Login::class.java))
     }
 
 }

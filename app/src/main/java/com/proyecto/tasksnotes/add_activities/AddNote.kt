@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.add
+package com.proyecto.tasksnotes.add_activities
 
 import android.os.Bundle
 import android.widget.Toast
@@ -11,7 +11,7 @@ import com.proyecto.tasksnotes.databinding.ActivityAddNoteBinding
 import com.proyecto.tasksnotes.model.Note
 import java.util.*
 
-class Add_Note_Activity : AppCompatActivity() {
+class AddNote : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var db: DatabaseReference

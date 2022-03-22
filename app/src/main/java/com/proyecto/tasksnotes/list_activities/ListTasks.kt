@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.list
+package com.proyecto.tasksnotes.list_activities
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -21,21 +21,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.R
-import com.proyecto.tasksnotes.add.Add_Task_Activity
+import com.proyecto.tasksnotes.add_activities.AddTask
 import com.proyecto.tasksnotes.databinding.ActivityListTasksBinding
-import com.proyecto.tasksnotes.detail.Detail_Task_Activity
+import com.proyecto.tasksnotes.detail_activities.DetailTask
 import com.proyecto.tasksnotes.model.Task
-import com.proyecto.tasksnotes.viewholder.ViewHolder_Task
+import com.proyecto.tasksnotes.viewholder.ViewHolderTask
 
 
-class List_Tasks : AppCompatActivity() {
+class ListTasks : AppCompatActivity() {
 
     private lateinit var binding: ActivityListTasksBinding
     private lateinit var recyclerViewTasks: RecyclerView
     private lateinit var db: FirebaseDatabase
     private lateinit var dataBaseReference: DatabaseReference
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: FirebaseRecyclerAdapter<Task, ViewHolder_Task>
+    private lateinit var adapter: FirebaseRecyclerAdapter<Task, ViewHolderTask>
     private lateinit var options: FirebaseRecyclerOptions<Task>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
@@ -59,7 +59,7 @@ class List_Tasks : AppCompatActivity() {
         listTasks()
 
         binding.addTaskButton.setOnClickListener {
-            startActivity(Intent(this, Add_Task_Activity::class.java))
+            startActivity(Intent(this, AddTask::class.java))
         }
     }
 
@@ -68,10 +68,10 @@ class List_Tasks : AppCompatActivity() {
         val query = dataBaseReference.child(emailPath).child("user_tasks").orderByChild("status")
 
         options = FirebaseRecyclerOptions.Builder<Task>().setQuery(query, Task::class.java).build()
-        adapter = object : FirebaseRecyclerAdapter<Task, ViewHolder_Task>(options) {
+        adapter = object : FirebaseRecyclerAdapter<Task, ViewHolderTask>(options) {
 
             @RequiresApi(Build.VERSION_CODES.M)
-            override fun onBindViewHolder(viewHolder_task: ViewHolder_Task, position: Int, task: Task) {
+            override fun onBindViewHolder(viewHolder_task: ViewHolderTask, position: Int, task: Task) {
 
                 viewHolder_task.setData(
                     applicationContext,
@@ -85,7 +85,7 @@ class List_Tasks : AppCompatActivity() {
                     task.status
                 )
 
-                viewHolder_task.setOnClickListener(object : ViewHolder_Task.ClickListener {
+                viewHolder_task.setOnClickListener(object : ViewHolderTask.ClickListener {
 
                     override fun onItemClick(view: View?, position: Int) {
 
@@ -99,7 +99,7 @@ class List_Tasks : AppCompatActivity() {
                         val status = getItem(position).status
 
                         //Enviar datos de la tarea a la actividad de detalle
-                        val intent = Intent(applicationContext, Detail_Task_Activity::class.java)
+                        val intent = Intent(applicationContext, DetailTask::class.java)
                         intent.putExtra("userName_detail", userName)
                         intent.putExtra("email_detail", email)
                         intent.putExtra("registryDate_detail", registerDate)
@@ -134,11 +134,11 @@ class List_Tasks : AppCompatActivity() {
                 }
             }
 
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Task {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTask {
 
                 val view: View =
                     LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
-                val taskViewholder = ViewHolder_Task(view)
+                val taskViewholder = ViewHolderTask(view)
                 return taskViewholder
             }
 

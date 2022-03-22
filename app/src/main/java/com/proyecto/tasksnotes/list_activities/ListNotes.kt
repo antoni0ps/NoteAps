@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.list
+package com.proyecto.tasksnotes.list_activities
 
 import android.content.Intent
 import android.os.Build
@@ -19,17 +19,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.R
-import com.proyecto.tasksnotes.add.Add_Note_Activity
+import com.proyecto.tasksnotes.add_activities.AddNote
 import com.proyecto.tasksnotes.databinding.ActivityListNotesBinding
-import com.proyecto.tasksnotes.detail.Detail_Note_Activity
+import com.proyecto.tasksnotes.detail_activities.DetailNote
 import com.proyecto.tasksnotes.model.Note
-import com.proyecto.tasksnotes.viewholder.ViewHolder_Note
+import com.proyecto.tasksnotes.viewholder.ViewHolderNote
 
-class List_Notes : AppCompatActivity() {
+class ListNotes : AppCompatActivity() {
 
     private lateinit var binding: ActivityListNotesBinding
     private lateinit var recyclerViewNotes: RecyclerView
-    private lateinit var adapter: FirebaseRecyclerAdapter<Note, ViewHolder_Note>
+    private lateinit var adapter: FirebaseRecyclerAdapter<Note, ViewHolderNote>
     private lateinit var options: FirebaseRecyclerOptions<Note>
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var auth: FirebaseAuth
@@ -53,7 +53,7 @@ class List_Notes : AppCompatActivity() {
         emailPath = auth.currentUser?.email!!.replace(".", ",")
 
         binding.addNoteButton.setOnClickListener {
-            val intent = Intent(this, Add_Note_Activity::class.java)
+            val intent = Intent(this, AddNote::class.java)
             startActivity(intent)
         }
 
@@ -66,17 +66,17 @@ class List_Notes : AppCompatActivity() {
         val query = databaseReference.child(emailPath).child("user_notes")
 
         options = FirebaseRecyclerOptions.Builder<Note>().setQuery(query, Note::class.java).build()
-        adapter = object : FirebaseRecyclerAdapter<Note, ViewHolder_Note>(options) {
+        adapter = object : FirebaseRecyclerAdapter<Note, ViewHolderNote>(options) {
 
             @RequiresApi(Build.VERSION_CODES.M)
-            override fun onBindViewHolder(holder: ViewHolder_Note, position: Int, note: Note) {
+            override fun onBindViewHolder(holder: ViewHolderNote, position: Int, note: Note) {
 
                 holder.setData(applicationContext, note.title, note.content)
                 val colorCode = note.colorCode
                 val mCardView: CardView = holder.mView.findViewById(R.id.noteCard)
                 mCardView.setCardBackgroundColor(holder.mView.resources.getColor(colorCode!!, null))
 
-                holder.setOnClickListener(object : ViewHolder_Note.ClickListener {
+                holder.setOnClickListener(object : ViewHolderNote.ClickListener {
                     override fun onItemClick(view: View?, position: Int) {
 
                         //obtener los datos de la nota
@@ -86,7 +86,7 @@ class List_Notes : AppCompatActivity() {
                         val noteId = getItem(holder.bindingAdapterPosition).noteId
 
                         //Enviar datos de la nota a la actividad de detalle
-                        val intent = Intent(applicationContext, Detail_Note_Activity::class.java)
+                        val intent = Intent(applicationContext, DetailNote::class.java)
                         intent.putExtra("title_detail", title)
                         intent.putExtra("content_detail", content)
                         intent.putExtra("colorCode", colorCode)
@@ -111,10 +111,10 @@ class List_Notes : AppCompatActivity() {
                 }
             }
 
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Note {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNote {
 
                 val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
-                return ViewHolder_Note(view)
+                return ViewHolderNote(view)
             }
         }
 
@@ -124,7 +124,7 @@ class List_Notes : AppCompatActivity() {
     }
 
     private fun deleteNote(noteId: String, position: Int) {
-        val builder = AlertDialog.Builder(this@List_Notes)
+        val builder = AlertDialog.Builder(this@ListNotes)
         builder.setTitle("Eliminar nota")
         builder.setMessage("¿Desea eliminar la nota?")
         builder.setPositiveButton("SI") { dialogInterface, i ->
