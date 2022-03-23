@@ -68,7 +68,7 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:background="@drawable/gradient_background_border"
+            android:background="@drawable/background_gradient_border"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
             android:text="recuperar contraseña"

@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.list_activities
+package com.proyecto.tasksnotes.list
 
 import android.content.Intent
 import android.os.Build
@@ -19,9 +19,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.R
-import com.proyecto.tasksnotes.add_activities.AddNote
+import com.proyecto.tasksnotes.add.AddNote
 import com.proyecto.tasksnotes.databinding.ActivityListNotesBinding
-import com.proyecto.tasksnotes.detail_activities.DetailNote
+import com.proyecto.tasksnotes.detail.DetailNote
 import com.proyecto.tasksnotes.model.Note
 import com.proyecto.tasksnotes.viewholder.ViewHolderNote
 

@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.detail_activities
+package com.proyecto.tasksnotes.detail
 
 import android.os.Build
 import android.os.Bundle

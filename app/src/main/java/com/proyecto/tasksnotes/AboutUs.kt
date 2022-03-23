@@ -52,7 +52,7 @@ class AboutUs : AppCompatActivity() {
                     " de grado superior de Desarrollo de Aplicaciones Multiplataforma.\n\n" +
                     "NoteAps es un organizador personal donde puedes almacenar tus notas, tareas " +
                     "y eventos de manera unficada y eficiente.")
-            .setImage(R.drawable.icono_app_completo_150px)
+            .setImage(R.drawable.img_app_150px)
             .addItem(name)
             .addItem(versionElement)
             .addItem(addIlerna())
@@ -70,7 +70,7 @@ class AboutUs : AppCompatActivity() {
     private fun addGithub(): Element {
         val github = Element()
         github.title = "GitHub"
-        github.iconDrawable = R.drawable.github_icon
+        github.iconDrawable = R.drawable.img_github
         github.iconTint = R.color.black_github
 
         val url = "https://github.com/antoni0ps"
@@ -85,7 +85,7 @@ class AboutUs : AppCompatActivity() {
     private fun addIlerna(): Element {
         val school = Element()
         school.title = "ILERNA Online"
-        school.iconDrawable = R.drawable.ilerna_icon
+        school.iconDrawable = R.drawable.img_ilerna
         school.iconTint = R.color.black
 
         val url = "https://www.ilerna.es/"
@@ -102,7 +102,7 @@ class AboutUs : AppCompatActivity() {
 
         val linkediIn = Element()
         linkediIn.title = "LinkedIn"
-        linkediIn.iconDrawable = R.drawable.linkedin_icon
+        linkediIn.iconDrawable = R.drawable.img_linkedin
         linkediIn.iconTint = R.color.blue_linkedin
 
         val url = "https://www.linkedin.com/in/antoniopinerosanchez/"

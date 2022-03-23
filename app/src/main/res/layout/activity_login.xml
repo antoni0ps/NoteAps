@@ -91,7 +91,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="64dp"
                     android:layout_marginTop="32dp"
-                    android:background="@drawable/gradient_background_border"
+                    android:background="@drawable/background_gradient_border"
                     android:fontFamily="@font/monserrat_regular"
                     android:text="Iniciar Sesión"
                     android:textColor="@color/darker_grey"

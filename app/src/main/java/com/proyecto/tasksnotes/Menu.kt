@@ -7,9 +7,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.proyecto.tasksnotes.databinding.ActivityMenuBinding
-import com.proyecto.tasksnotes.list_activities.ListEvents
-import com.proyecto.tasksnotes.list_activities.ListNotes
-import com.proyecto.tasksnotes.list_activities.ListTasks
+import com.proyecto.tasksnotes.list.ListEvents
+import com.proyecto.tasksnotes.list.ListNotes
+import com.proyecto.tasksnotes.list.ListTasks
 
 class Menu : AppCompatActivity() {
 

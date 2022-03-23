@@ -29,7 +29,7 @@
                 android:layout_height="90dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/nombreapp" />
+                android:src="@drawable/img_name_app" />
         </LinearLayout>
 
         <LinearLayout
@@ -162,7 +162,7 @@
                 android:layout_marginHorizontal="64dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/gradient_background_border"
+                android:background="@drawable/background_gradient_border"
                 android:fontFamily="@font/monserrat_regular"
                 android:text="Registro"
                 android:textColor="@color/darker_grey"

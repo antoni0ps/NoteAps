@@ -19,31 +19,31 @@
             android:name=".recovery.AccountRecovery"
             android:exported="false" />
         <activity
-            android:name=".list_activities.ListEvents"
+            android:name=".list.ListEvents"
             android:exported="false" />
         <activity
-            android:name=".add_activities.AddEvent"
+            android:name=".add.AddEvent"
             android:exported="false" />
         <activity
-            android:name=".detail_activities.DetailEvent"
+            android:name=".detail.DetailEvent"
             android:exported="false" />
         <activity
-            android:name=".detail_activities.DetailNote"
+            android:name=".detail.DetailNote"
             android:exported="false" />
         <activity
-            android:name=".list_activities.ListNotes"
+            android:name=".list.ListNotes"
             android:exported="false" />
         <activity
-            android:name=".add_activities.AddNote"
+            android:name=".add.AddNote"
             android:exported="false" />
         <activity
-            android:name=".detail_activities.DetailTask"
+            android:name=".detail.DetailTask"
             android:exported="false" />
         <activity
-            android:name=".list_activities.ListTasks"
+            android:name=".list.ListTasks"
             android:exported="false" />
         <activity
-            android:name=".add_activities.AddTask"
+            android:name=".add.AddTask"
             android:exported="false" />
         <activity
             android:name=".Menu"

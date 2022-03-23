@@ -22,7 +22,7 @@
         <item name="title">false</item>
         <item name="android:textColorPrimary">@color/darker_grey</item>
         <item name= "android:textColorSecondary">@color/darker_grey</item>
-        <item name = "background">@drawable/gradient_background_border</item>
+        <item name = "background">@drawable/background_gradient_border</item>
         <item name = "android:textStyle">bold</item>
 
     </style>

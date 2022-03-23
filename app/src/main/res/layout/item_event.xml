@@ -26,7 +26,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:src="@drawable/event_image" />
+                android:src="@drawable/img_event" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

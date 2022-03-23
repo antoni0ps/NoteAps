@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detail_activities.DetailEvent">
+    tools:context=".detail.DetailEvent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:background="@drawable/custom_timepicker"
+            android:background="@drawable/bakcground_custom_timepicker"
             android:orientation="vertical"
             android:padding="10dp">
 

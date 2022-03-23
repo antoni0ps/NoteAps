@@ -1,4 +1,4 @@
-package com.proyecto.tasksnotes.add_activities
+package com.proyecto.tasksnotes.add
 
 import android.annotation.SuppressLint
 import android.content.Intent

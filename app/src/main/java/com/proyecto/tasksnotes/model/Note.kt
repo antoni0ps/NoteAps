@@ -1,13 +1,13 @@
 package com.proyecto.tasksnotes.model
 
-data class Note (
+data class Note(
     var noteId: String?,
-    var email : String?,
+    var email: String?,
     var title: String?,
     var content: String?,
-    var colorCode : Int?
-){
-    constructor() : this("","","","",0)
+    var colorCode: Int?
+) {
+    constructor() : this("", "", "", "", 0)
 }
 
 

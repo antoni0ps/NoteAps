@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".add_activities.AddEvent">
+    tools:context=".add.AddEvent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/gradient_background_border"
+            android:background="@drawable/background_gradient_border"
             android:elevation="8dp"
             android:fontFamily="@font/monserrat_regular"
             android:text="Guardar"
@@ -124,7 +124,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/gradient_background_border"
+                android:background="@drawable/background_gradient_border"
                 app:dateTextColor="@color/darker_grey"
                 app:dayTextColor="@color/darker_grey"
                 app:monthTextColor="@color/darker_grey" />
@@ -165,7 +165,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_timepicker"
+                    android:background="@drawable/bakcground_custom_timepicker"
                     android:theme="@style/TimepickerStyle"
                     android:timePickerMode="spinner" />
 
@@ -174,7 +174,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custom_timepicker"
+                    android:background="@drawable/bakcground_custom_timepicker"
                     android:orientation="vertical"
                     android:weightSum="3">
 
@@ -242,8 +242,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:textColor="@color/dark_grey"
-                    android:textOff="no"
-                    android:textOn="si"
                     app:layout_constraintTop_toBottomOf="@id/calendarButton" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

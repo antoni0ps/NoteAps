@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add_activities.AddTask">
+    tools:context=".add.AddTask">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/gradient_background_border"
+            android:background="@drawable/background_gradient_border"
             android:elevation="8dp"
             android:fontFamily="@font/monserrat_regular"
             android:text="Guardar"
@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/gradient_background_border"
+                android:background="@drawable/background_gradient_border"
                 app:dateTextColor="@color/darker_grey"
                 app:dayTextColor="@color/darker_grey"
                 app:monthTextColor="@color/darker_grey" />
